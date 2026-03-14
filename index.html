@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apprendre le français — 10 jours</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Français 10">
+<link rel="apple-touch-icon" href="icon-192x192.png">
+<link rel="icon" href="icon-192x192.png">
+<style>
+:root{
+  --bg:#f0f4ff;--bg2:#e8eeff;--white:#ffffff;--blue:#2563eb;--blue2:#1d4ed8;
+  --blue3:#dbeafe;--blue4:#eff6ff;--green:#059669;--green2:#d1fae5;
+  --amber:#d97706;--amber2:#fef3c7;--red:#dc2626;--red2:#fee2e2;
+  --text:#1e293b;--text2:#475569;--text3:#94a3b8;--border:#cbd5e1;
+  --border2:#e2e8f0;--shadow:0 1px 4px rgba(37,99,235,.08);
+  --shadow2:0 4px 16px rgba(37,99,235,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:20px 14px}
+.topbar{background:var(--white);border:1px solid var(--border2);border-radius:16px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-flag{font-size:1.6rem}
+.logo-title{font-size:1rem;font-weight:700;color:var(--text)}
+.logo-sub{font-size:.7rem;color:var(--text3);margin-top:1px}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.ov-stat{text-align:center}
+.ov-val{font-size:1.1rem;font-weight:700;color:var(--blue)}
+.ov-lbl{font-size:.68rem;color:var(--text3)}
+.ov-ring{position:relative;width:52px;height:52px}
+.ov-ring svg{transform:rotate(-90deg)}
+.ov-ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--blue)}
+.prog-bar-wrap{background:var(--white);border:1px solid var(--border2);border-radius:12px;padding:12px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.prog-labels{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:8px;color:var(--text2)}
+.prog-track{height:8px;background:var(--bg2);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),#60a5fa);border-radius:99px;transition:width .5s}
+.tabs-wrap{background:var(--white);border:1px solid var(--border2);border-radius:14px;padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;min-width:68px;padding:8px 10px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg);cursor:pointer;text-align:center;font-family:'Poppins',Arial,sans-serif;transition:all .2s}
+.tab:hover:not(.tlocked){border-color:var(--blue);background:var(--blue4)}
+.tab.tactive{background:var(--blue);border-color:var(--blue);color:#fff}
+.tab.tactive .tab-lbl{color:#ffffffbb}
+.tab.tdone{background:var(--green2);border-color:var(--green)}
+.tab.tdone .tab-num{color:var(--green)}
+.tab.tlocked{opacity:.35;cursor:not-allowed}
+.tab-num{font-size:.9rem;font-weight:700;display:block;color:var(--text)}
+.tab-lbl{font-size:.62rem;color:var(--text2);display:block;margin-top:1px}
+.tab-dots{display:flex;gap:3px;justify-content:center;margin-top:5px}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--border)}
+.tdot.listen.on{background:var(--blue)}
+.tdot.read.on{background:var(--green)}
+.tdot.speak.on{background:var(--amber)}
+.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));border-radius:18px;padding:22px 24px;margin-bottom:16px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;overflow:hidden;box-shadow:var(--shadow2)}
+.hero::after{content:'🇫🇷';position:absolute;right:-10px;top:-10px;font-size:100px;opacity:.07;pointer-events:none}
+.hero-l{display:flex;align-items:center;gap:14px}
+.hero-num{width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;flex-shrink:0}
+.hero-title{font-size:1.1rem;font-weight:700}
+.hero-topic{font-size:.8rem;opacity:.85;margin-top:3px}
+.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:7px 14px;font-size:.78rem;white-space:nowrap}
+.phases{display:grid;gap:14px;margin-bottom:16px}
+.pcard{background:var(--white);border:1.5px solid var(--border2);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:border-color .2s}
+.pcard.pdone{border-color:var(--green)}
+.pcard.pdone .ptop{background:var(--green2)}
+.ptop{padding:16px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;transition:background .15s;background:var(--white)}
+.ptop:hover{background:var(--blue4)}
+.pcard.pdone .ptop:hover{background:#bbf7d0}
+.picon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.picon.listen{background:var(--blue3)}
+.picon.read{background:var(--green2)}
+.picon.speak{background:var(--amber2)}
+.pmeta{flex:1}
+.pname{font-size:.95rem;font-weight:700;color:var(--text)}
+.pdur{font-size:.75rem;color:var(--text2);margin-top:2px}
+.pbadge{padding:4px 12px;border-radius:99px;font-size:.7rem;font-weight:700}
+.pb-done{background:var(--green2);color:var(--green)}
+.pb-open{background:var(--blue3);color:var(--blue)}
+.pb-lock{background:var(--bg2);color:var(--text3)}
+.pbody{display:none;padding:0 20px 20px;border-top:1.5px solid var(--border2)}
+.pbody.open{display:block}
+.res-lbl{font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 8px}
+.res-link{display:flex;align-items:center;gap:12px;background:var(--bg);border:1.5px solid var(--border2);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--text);transition:all .15s;cursor:pointer}
+.res-link:hover{border-color:var(--blue);background:var(--blue4);box-shadow:var(--shadow)}
+.res-icon{font-size:1.3rem;flex-shrink:0}
+.res-name{font-size:.85rem;font-weight:600;color:var(--text)}
+.res-url{font-size:.7rem;color:var(--text3);margin-top:2px}
+.res-arrow{color:var(--blue);font-size:.9rem;flex-shrink:0}
+.speak-box{background:var(--amber2);border:1.5px solid #fcd34d;border-radius:14px;padding:14px 16px;margin:12px 0}
+.speak-lbl{font-size:.7rem;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.speak-text{font-size:.92rem;font-weight:700;color:var(--text)}
+.speak-ref{font-size:.75rem;color:var(--text2);margin-top:6px}
+.timer-section{background:var(--blue4);border:1.5px solid var(--blue3);border-radius:14px;padding:18px;margin:14px 0;text-align:center}
+.timer-lbl-top{font-size:.75rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.timer-ring-wrap{position:relative;display:inline-block;margin-bottom:12px}
+.timer-ring-wrap svg{transform:rotate(-90deg)}
+.timer-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.timer-num{font-size:1.9rem;font-weight:700;color:var(--blue);direction:ltr;font-variant-numeric:tabular-nums}
+.timer-num.run{color:var(--green)}
+.timer-num.done{color:var(--amber)}
+.timer-sub{font-size:.7rem;color:var(--text3);margin-top:2px}
+.timer-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.btn{padding:9px 20px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);color:var(--text);font-family:'Poppins',Arial,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .15s}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.blue:hover{background:var(--blue2)}
+.btn.green{background:var(--green);border-color:var(--green);color:#fff}
+.timer-lock-msg{display:flex;align-items:center;gap:8px;background:var(--red2);border:1.5px solid #fca5a5;border-radius:10px;padding:10px 14px;margin-top:12px;font-size:.82rem;color:var(--red);font-weight:600}
+.quiz-box{background:var(--bg);border:1.5px solid var(--border2);border-radius:14px;padding:18px;margin-top:14px}
+.quiz-hdr{font-size:.88rem;font-weight:700;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.quiz-q{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.6}
+.quiz-opts{display:flex;flex-direction:column;gap:7px}
+.qopt{padding:11px 14px;border-radius:10px;border:1.5px solid var(--border2);background:var(--white);color:var(--text2);font-family:'Poppins',Arial,sans-serif;font-size:.87rem;text-align:left;cursor:pointer;transition:all .15s;width:100%}
+.qopt:hover:not(.dis){border-color:var(--blue);color:var(--text);background:var(--blue4)}
+.qopt.ok{background:var(--green2);border-color:var(--green);color:var(--green)}
+.qopt.no{background:var(--red2);border-color:var(--red);color:var(--red)}
+.qopt.dis{cursor:default}
+.q-fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.83rem;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:var(--green2);color:var(--green);border:1px solid #86efac}
+.q-fb.no{background:var(--red2);color:var(--red);border:1px solid #fca5a5}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.quiz-prog{font-size:.75rem;color:var(--text3)}
+.q-score{background:var(--amber2);color:var(--amber);padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:700}
+.quiz-result{text-align:center;padding:14px 0}
+.quiz-result .big{font-size:2.2rem;font-weight:700}
+.quiz-result .big.ok{color:var(--green)}
+.quiz-result .big.bad{color:var(--amber)}
+.quiz-result .msg{font-size:.85rem;color:var(--text2);margin:6px 0 14px}
+.quiz-hdr .q-needed{background:var(--blue3);color:var(--blue);padding:3px 10px;border-radius:99px;font-size:.72rem;font-weight:700}
+.audio-q-wrap{background:var(--blue4);border:1.5px solid var(--blue3);border-radius:12px;padding:14px;margin-bottom:12px;text-align:center}
+.audio-play-btn{background:var(--blue);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:'Poppins',Arial,sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.audio-play-btn:hover{background:var(--blue2)}
+.audio-play-btn.playing{background:var(--green)}
+.audio-hint{font-size:.72rem;color:var(--text3);margin-top:6px}
+.speech-q-wrap{background:var(--amber2);border:1.5px solid #fcd34d;border-radius:12px;padding:14px;margin-bottom:12px;text-align:center}
+.speech-record-btn{background:var(--red);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-family:'Poppins',Arial,sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;margin:6px}
+.speech-record-btn:hover{opacity:.88}
+.speech-record-btn.recording{background:#7c3aed;animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.speech-transcript{font-size:.82rem;color:var(--text2);margin-top:6px;min-height:20px;font-style:italic}
+.speech-hint{font-size:.7rem;color:var(--text3);margin-top:4px}
+.score-req-msg{background:var(--amber2);border:1.5px solid #fcd34d;border-radius:10px;padding:10px 14px;margin-top:10px;font-size:.82rem;color:var(--amber);font-weight:600;text-align:center}
+.complete-btn-wrap{margin-top:14px}
+.complete-btn{width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--green),#10b981);color:#fff;font-family:'Poppins',Arial,sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(5,150,105,.25)}
+.complete-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(5,150,105,.35)}
+.done-stamp{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--green2);border:1.5px solid #86efac;border-radius:12px;color:var(--green);font-size:.88rem;font-weight:700;margin-top:14px}
+.day-banner{background:linear-gradient(135deg,var(--green2),var(--blue3));border:1.5px solid var(--green);border-radius:16px;padding:22px;text-align:center;display:none;margin-bottom:16px;box-shadow:var(--shadow2)}
+.day-banner.show{display:block}
+.day-banner h3{font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:6px}
+.day-banner p{font-size:.88rem;color:var(--text2)}
+.locked-day{background:var(--white);border:1.5px solid var(--border2);border-radius:18px;padding:48px;text-align:center;box-shadow:var(--shadow)}
+.locked-day .lock-ico{font-size:2.5rem;margin-bottom:12px}
+.locked-day p{font-size:.9rem;color:var(--text2)}
+.sep{height:1px;background:var(--border2);margin:14px 0}
+.half-indicators{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
+.half-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 18px;border-radius:12px;border:2px solid var(--border2);background:var(--bg);min-width:90px;transition:all .3s}
+.half-item.half-done{background:var(--green2);border-color:var(--green)}
+.half-item.half-run{background:var(--blue3);border-color:var(--blue);animation:halfPulse 1.5s infinite}
+.half-item.half-wait{opacity:.5}
+@keyframes halfPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.3)}50%{box-shadow:0 0 0 6px rgba(37,99,235,.0)}}
+.half-num{font-size:1.1rem;font-weight:900;color:var(--blue)}
+.half-item.half-done .half-num{color:var(--green)}
+.half-lbl{font-size:.7rem;color:var(--text2);font-weight:600}
+.half-check{font-size:.85rem;color:var(--green)}
+.half-sep{font-size:1.2rem;color:var(--text3);font-weight:700}
+.alarm-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#fff;border-radius:20px;padding:30px 36px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.25);border:3px solid var(--green);min-width:280px;animation:popIn .3s ease}
+@keyframes popIn{from{transform:translate(-50%,-50%) scale(.7);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+.alarm-popup .alarm-ico{font-size:3rem;margin-bottom:10px}
+.alarm-popup h3{font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:8px}
+.alarm-popup p{font-size:.85rem;color:var(--text2);margin-bottom:18px}
+.alarm-overlay{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.4)}
+@media(max-width:600px){
+  .hero{flex-direction:column;align-items:flex-start}
+  .hero-badge{display:none}
+  .topbar-right{gap:10px}
+  .timer-num{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="topbar">
+  <div class="logo">
+    <span class="logo-flag">🇫🇷</span>
+    <div>
+      <div class="logo-title">Apprendre le français</div>
+      <div class="logo-sub">30 heures · 10 jours · 3h/jour</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="ov-stat">
+      <div class="ov-val" id="statDays">0/10</div>
+      <div class="ov-lbl">Jours</div>
+    </div>
+    <div class="ov-stat">
+      <div class="ov-val" id="statHours">0h</div>
+      <div class="ov-lbl">Heures</div>
+    </div>
+    <div class="ov-ring">
+      <svg width="52" height="52" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="21" fill="none" stroke="#dbeafe" stroke-width="5"/>
+        <circle id="ovArc" cx="26" cy="26" r="21" fill="none" stroke="#2563eb" stroke-width="5"
+          stroke-dasharray="131.9" stroke-dashoffset="131.9" stroke-linecap="round"
+          transform="rotate(-90 26 26)" style="transition:stroke-dashoffset .5s"/>
+      </svg>
+      <div class="ov-ring-pct" id="ovPct">0%</div>
+    </div>
+  </div>
+</div>
+<div class="prog-bar-wrap">
+  <div class="prog-labels">
+    <span>Progression totale (30 heures)</span>
+    <span id="progPct" style="font-weight:700;color:var(--blue)">0%</span>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+</div>
+<div class="tabs-wrap"><div class="tabs" id="tabsEl"></div></div>
+<div id="mainEl"></div>
+</div>
+<script>
+// ═══════════════════════════════════════════
+// DONNÉES — 10 jours, 3 phases, 12 questions chacune
+// Réponses correctes variées (c: 0,1,2,3)
+// ═══════════════════════════════════════════
+var DAYS=[
+
+{day:1,title:"Culture & Alimentation",topic:"Vocabulaire culinaire et culture quotidienne",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"We Try The Most Popular French Snacks! | Super Easy French 156",url:"https://www.youtube.com/watch?v=xTy21_vWZjY",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'chips à l'ancienne' ؟",opts:["La chocolaterie artisanale","Les gâteaux de riz","Les chips à l'ancienne (رقائق تقليدية)","Le biscuit salé industriel"],c:2,e:"chips à l'ancienne = رقائق البطاطس بالطريقة التقليدية"},
+     {q:"ما هو 'Petit Beurre' ؟",opts:["Un biscuit au beurre classique","Un fromage normand","Un pain viennois","Un chocolat noir fin"],c:0,e:"Petit Beurre = بسكويت زبدة فرنسي كلاسيكي شهير جداً"},
+     {q:"كيف يقال 'لذيذ' بالفرنسية ؟",opts:["magnifique","superbe","parfait","délicieux"],c:3,e:"délicieux = لذيذ — من أكثر الكلمات استخداماً عند وصف الطعام"},
+     {q:"كيف تقول 'أنا جائع' ؟",opts:["Je suis fatigué","J'ai soif","J'ai faim","Je suis malade"],c:2,e:"J'ai faim = أنا جائع | avoir faim = يشعر بالجوع"},
+     {q:"كيف تقول 'هذا لذيذ جداً' ؟",opts:["C'est trop cher","C'est vraiment délicieux","C'est trop salé","C'est bizarre"],c:1,e:"C'est vraiment délicieux = هذا لذيذ جداً | vraiment = حقاً"},
+     {q:"ما معنى 'croissant' ؟",opts:["Un gâteau au chocolat","Un pain sucré rond","Un type de fromage","Un croissant (معجنة هلالية)"],c:3,e:"le croissant = المعجنة الهلالية — رمز المطبخ الفرنسي الصباحي"},
+     {q:"كيف تقول 'أريد المزيد من الخبز' ؟",opts:["Je voudrais plus de pain","Je veux moins de pain","Je n'aime pas le pain","Je cherche du pain"],c:0,e:"Je voudrais plus de pain = أريد المزيد من الخبز | plus de = المزيد من"},
+     {q:"ما معنى 'la boulangerie' ؟",opts:["L'épicerie (بقالة)","La boucherie (جزارة)","La boulangerie (مخبز)","La pâtisserie (حلوانية)"],c:2,e:"la boulangerie = المخبز — مكان لا غنى عنه في فرنسا"},
+     {q:"كيف تقول 'أريد أن أذوق هذا' ؟",opts:["Je veux cuisiner cela","Je veux jeter cela","Je veux éviter cela","Je veux goûter cela"],c:3,e:"goûter = يذوق | je veux goûter = أريد أن أذوق"},
+     {q:"ما معنى 'sans sucre' ؟",opts:["Sans sucre (بدون سكر)","Très sucré","Avec du miel","Peu sucré"],c:0,e:"sans sucre = بدون سكر | sans = بدون — نقيض 'avec'"},
+     {q:"كيف تقول 'الفاتورة من فضلك' في مطعم ؟",opts:["Le menu, s'il vous plaît","La cuisine, s'il vous plaît","Un verre d'eau, s'il vous plaît","L'addition, s'il vous plaît"],c:3,e:"l'addition = الفاتورة — تعبير أساسي في المطعم"},
+     {q:"ما معنى 'fait maison' ؟",opts:["Fait en usine","Fait maison (محلي الصنع)","Importé de France","Fait à la commande"],c:1,e:"fait maison = محلي الصنع / منزلي — مصطلح يُقدَّر في المطاعم الفرنسية"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Alimentation et consommation en France — RFI",url:"https://www.rfi.fr/fr/france/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'la grande distribution' ؟",opts:["Le commerce électronique","La distribution postale","La grande distribution (تجارة التجزئة الكبرى)","L'industrie alimentaire"],c:2,e:"la grande distribution = تجارة التجزئة الكبرى (كالسوبرماركت)"},
+     {q:"ما معنى 'le chiffre d'affaires' ؟",opts:["Le nombre d'employés","Le chiffre d'affaires (رقم الأعمال)","La marge bénéficiaire","Le budget marketing"],c:1,e:"le chiffre d'affaires = رقم الأعمال أو إجمالي المبيعات"},
+     {q:"كيف تقول 'السوق الفرنسية' ؟",opts:["l'économie française","le commerce français","la bourse française","le marché français"],c:3,e:"le marché français = السوق الفرنسية | marché = سوق"},
+     {q:"ما معنى 'la concurrence' ؟",opts:["La coopération","La fusion","La concurrence (المنافسة)","Le monopole"],c:2,e:"la concurrence = المنافسة — مفهوم أساسي في الاقتصاد"},
+     {q:"ما معنى 'les parts de marché' ؟",opts:["Les dividendes boursiers","Les parts de marché (حصص السوق)","Les bénéfices nets","Le cours des actions"],c:1,e:"les parts de marché = حصص السوق — نسبة السوق المستحوذ عليها"},
+     {q:"كيف تقول 'الأسعار في ارتفاع' ؟",opts:["Les prix sont stables","Les prix sont en baisse","Les prix chutent","Les prix sont en hausse"],c:3,e:"en hausse = في ارتفاع | en baisse = في انخفاض — مصطلحان اقتصاديان أساسيان"},
+     {q:"ما معنى 'le consommateur' ؟",opts:["Le producteur","Le fournisseur","Le consommateur (المستهلك)","Le distributeur"],c:2,e:"le consommateur = المستهلك — الشخص الذي يشتري ويستخدم المنتجات"},
+     {q:"ما معنى 'la livraison' ؟",opts:["La production","La livraison (التوصيل / الشحن)","Le stockage","La facturation"],c:1,e:"la livraison = التوصيل أو الشحن | livrer = يسلّم"},
+     {q:"كيف تقول 'الشركة تنمو بسرعة' ؟",opts:["L'entreprise ferme ses portes","L'entreprise est en crise","L'entreprise se développe rapidement","L'entreprise perd des clients"],c:2,e:"se développer = ينمو / يتطور | rapidement = بسرعة"},
+     {q:"ما معنى 'les soldes' ؟",opts:["Les impôts","Les stocks","Les emprunts","Les soldes (التخفيضات)"],c:3,e:"les soldes = التخفيضات الموسمية — منظمة بالقانون في فرنسا"},
+     {q:"كيف تقول 'منافسة شديدة' ؟",opts:["Une concurrence féroce","Une coopération parfaite","Un marché fermé","Une fusion réussie"],c:0,e:"une concurrence féroce = منافسة شرسة / شديدة | féroce = شرس"},
+     {q:"ما معنى 'la fidélité client' ؟",opts:["Le service après-vente","La satisfaction client","La fidélité client (ولاء العميل)","Le taux de retour"],c:2,e:"la fidélité client = ولاء العميل — هدف استراتيجي رئيسي للعلامات التجارية"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"🍽️ Parlez de votre plat préféré et de la cuisine de votre pays",
+   ref:"Revoyez la vidéo et notez le style descriptif — puis appliquez-le",
+   res:{name:"We Try The Most Popular French Snacks! | Super Easy French 156",url:"https://www.youtube.com/watch?v=xTy21_vWZjY",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'طبقي المفضل هو...' ؟",opts:["Ma cuisine favorite est...","Je mange souvent...","Mon plat préféré est...","J'adore cuisiner..."],c:2,e:"Mon plat préféré est = طبقي المفضل هو | préféré = مفضّل"},
+     {q:"كيف تقول 'أنا أحب الطعام الحار' ؟",opts:["Je déteste le piment","J'aime la nourriture épicée","Je mange peu de viande","J'adore le sucre"],c:1,e:"J'aime = أحب | la nourriture épicée = الطعام الحار"},
+     {q:"كيف تقول 'أنا نباتي' ؟",opts:["Je mange de la viande","Je suis végétarien(ne)","Je mange du poisson","Je suis allergique"],c:1,e:"végétarien(ne) = نباتي/ة — يُستخدم مع être بدون article"},
+     {q:"كيف تطلب الوصفة بأدب ؟",opts:["Donnez-moi la recette !","C'est à vous ?","Puis-je goûter ?","Pourriez-vous me donner la recette ?"],c:3,e:"Pourriez-vous = هل يمكنك (شرط مؤدب) — أكثر أدباً من 'pouvez-vous'"},
+     {q:"ما معنى 'bien cuit' للشواء ؟",opts:["Saignant (نيئ)","Bleu (نيئ جداً)","À point (متوسط)","Bien cuit (مشوي جيداً)"],c:3,e:"bien cuit = مشوي جيداً — الدرجات: bleu → saignant → à point → bien cuit"},
+     {q:"كيف تقول 'أنا حساس لمادة اللاكتوز' ؟",opts:["Je suis végétalien","Je n'aime pas le fromage","Je suis intolérant(e) au lactose","J'aime le lait"],c:2,e:"intolérant(e) au lactose = حساس/ة للاكتوز — معلومة صحية مهمة"},
+     {q:"كيف تقول 'وجبة الإفطار' ؟",opts:["Le dîner","Le goûter","Le déjeuner","Le petit-déjeuner"],c:3,e:"le petit-déjeuner = وجبة الإفطار | déjeuner = غداء | dîner = عشاء"},
+     {q:"كيف تقول 'الفاتورة من فضلك' ؟",opts:["Le menu, s'il vous plaît","Une table pour deux","L'addition, s'il vous plaît","Je voudrais commander"],c:2,e:"l'addition = الفاتورة — في المطعم يقال 'l'addition' لا 'la facture'"},
+     {q:"ما معنى 'Je voudrais réserver une table' ؟",opts:["Je voudrais commander un plat","Je voudrais payer la note","Je voudrais réserver une table (أريد حجز طاولة)","Je voudrais voir le menu"],c:2,e:"réserver = يحجز | une table = طاولة | Je voudrais = أود (مؤدب)"},
+     {q:"كيف تقول 'هذا الطبق يحتوي على...' ؟",opts:["Ce plat contient...","Ce plat est délicieux...","Ce plat coûte...","Ce plat vient de..."],c:0,e:"ce plat contient = هذا الطبق يحتوي على | contenir = يحتوي على"},
+     {q:"كيف تعبّر عن إعجابك بالطعام ؟",opts:["C'est immangeable !","Je n'aime pas du tout","C'est un peu fade","C'est absolument délicieux !"],c:3,e:"absolument délicieux = لذيذ بشكل مطلق | absolument = تماماً"},
+     {q:"ما معنى 'la spécialité régionale' ؟",opts:["Un plat importé","La spécialité régionale (التخصص الإقليمي)","Un aliment bio","Un plat sans gluten"],c:1,e:"la spécialité régionale = الطبق المحلي المميز — مثل la bouillabaisse من مرسيليا"}
+   ]}
+]},
+
+{day:2,title:"Travail & Vie professionnelle",topic:"Vocabulaire professionnel et présentation",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"What do French people do for a living? | Super Easy French 114",url:"https://www.youtube.com/watch?v=Cg5g4MxRqAc",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'أنا أعمل مهندساً' ؟",opts:["Je suis ingénieur","Je cherche un emploi","Je travaille beaucoup","Je suis étudiant"],c:0,e:"Je suis ingénieur — لا تستخدم 'un' مع المهن بعد être"},
+     {q:"ما معنى 'l'entreprise' ؟",opts:["La formation","L'entreprise (الشركة)","Le salaire","Le contrat"],c:1,e:"l'entreprise = الشركة أو المؤسسة"},
+     {q:"كيف تقول 'مقابلة عمل' ؟",opts:["une réunion","un stage","un entretien d'embauche","un contrat"],c:2,e:"un entretien d'embauche = مقابلة عمل — entretien = محادثة، embauche = توظيف"},
+     {q:"ما معنى 'le télétravail' ؟",opts:["Le travail de nuit","Le travail en équipe","Le travail à l'étranger","Le télétravail (العمل عن بُعد)"],c:3,e:"le télétravail = العمل عن بُعد — أصبح شائعاً جداً منذ 2020"},
+     {q:"كيف تقول 'أنا مستقل / فريلانسر' ؟",opts:["Je suis fonctionnaire","Je suis stagiaire","Je suis salarié","Je suis freelance / indépendant"],c:3,e:"freelance / indépendant = مستقل — يعمل بحساب نفسه بدون عقد دائم"},
+     {q:"ما معنى 'les congés payés' ؟",opts:["Les heures supplémentaires","Les primes annuelles","Les congés payés (الإجازات مدفوعة الأجر)","La retraite anticipée"],c:2,e:"les congés payés = الإجازات مدفوعة الأجر — 5 أسابيع في السنة في فرنسا"},
+     {q:"كيف تقول 'لقد تمت ترقيتي' ؟",opts:["J'ai été licencié(e)","J'ai démissionné","J'ai été muté(e)","J'ai été promu(e)"],c:3,e:"être promu(e) = تمت ترقيته/ترقيتها — passé composé de 'promouvoir'"},
+     {q:"ما معنى 'le recrutement' ؟",opts:["Le licenciement","La retraite","Le recrutement (التوظيف)","La démission"],c:2,e:"le recrutement = التوظيف — عملية اختيار المرشحين"},
+     {q:"كيف تقول 'أتقدم لهذه الوظيفة' ؟",opts:["Je quitte ce poste","Je postule à ce poste","J'occupe ce poste","Je refuse ce poste"],c:1,e:"postuler à = يتقدم لـ — فعل أساسي في البحث عن عمل"},
+     {q:"ما معنى 'le CDI' ؟",opts:["Contrat à Durée Indéterminée (عقد دائم)","Contrat à Durée Intermédiaire","Contrat de Développement Industriel","Contrat Dirigeant International"],c:0,e:"CDI = عقد دائم بلا تاريخ انتهاء — الأكثر أماناً للموظف في فرنسا"},
+     {q:"كيف تقول 'مهاراتي الرئيسية هي...' ؟",opts:["Mon salaire est...","Mes compétences principales sont...","Mon bureau est...","Ma formation est..."],c:1,e:"Mes compétences principales = مهاراتي الرئيسية | compétences = مهارات"},
+     {q:"ما معنى 'le SMIC' ؟",opts:["Un syndicat de travailleurs","Un diplôme professionnel","Un contrat à temps partiel","Le salaire minimum légal en France"],c:3,e:"le SMIC = الحد الأدنى للأجور في فرنسا — يُحدَّث سنوياً"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Emploi et travail en France — RFI",url:"https://www.rfi.fr/fr/economie/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'le taux de chômage' ؟",opts:["Le taux de croissance","Le taux d'inflation","Le taux de chômage (معدل البطالة)","Le taux d'intérêt"],c:2,e:"le taux de chômage = معدل البطالة (taux = معدل، chômage = بطالة)"},
+     {q:"ما معنى 'les ressources humaines' ؟",opts:["Les ressources humaines (الموارد البشرية)","Les matières premières","Les ressources naturelles","Le capital financier"],c:0,e:"les ressources humaines = الموارد البشرية (RH)"},
+     {q:"كيف تقول 'أبحث عن عمل' ؟",opts:["J'ai un bon travail","J'ai trouvé un emploi","Je cherche un emploi","Je veux démissionner"],c:2,e:"Je cherche un emploi = أبحث عن عمل — chercher = يبحث عن"},
+     {q:"ما معنى 'la reprise économique' ؟",opts:["La récession","La stagnation","La reprise économique (الانتعاش الاقتصادي)","L'inflation"],c:2,e:"la reprise = الانتعاش — العودة إلى النمو بعد فترة صعبة"},
+     {q:"ما معنى 'les syndicats' ؟",opts:["Les syndicats (النقابات)","Les partis politiques","Les associations","Les mutuelles"],c:0,e:"les syndicats = النقابات العمالية — تدافع عن حقوق العمال"},
+     {q:"كيف تقول 'إعلان توظيف' ؟",opts:["Une offre de formation","Une offre d'emploi","Un refus d'emploi","Un contrat de travail"],c:1,e:"une offre d'emploi = إعلان توظيف — ابحث على LinkedIn, Indeed, Pôle Emploi"},
+     {q:"ما معنى 'la productivité' ؟",opts:["La créativité","La productivité (الإنتاجية)","La rentabilité","La compétitivité"],c:1,e:"la productivité = الإنتاجية — نسبة الإنتاج إلى الموارد المستخدمة"},
+     {q:"ما معنى 'secteur public / secteur privé' ؟",opts:["Secteur public (قطاع حكومي) / secteur privé (قطاع خاص)","Secteur formel / informel","Secteur industriel / agricole","Secteur local / international"],c:0,e:"secteur public = القطاع الحكومي | secteur privé = القطاع الخاص"},
+     {q:"كيف تقول 'مرحلة تدريب في الشركة' ؟",opts:["Un entretien","Un licenciement","Un stage en entreprise","Une mutation"],c:2,e:"un stage = تدريب / فترة تدريب في شركة — إلزامي في كثير من الدراسات الفرنسية"},
+     {q:"ما معنى 'la grève' ؟",opts:["La manifestation","La pétition","La grève (الإضراب)","Le referendum"],c:2,e:"la grève = الإضراب — حق دستوري في فرنسا تمارسه النقابات"},
+     {q:"كيف تقول 'ميزان المدفوعات' ؟",opts:["Le budget de l'État","La balance des paiements","La dette publique","Le taux de change"],c:1,e:"la balance des paiements = ميزان المدفوعات — الفرق بين الصادرات والواردات"},
+     {q:"ما معنى 'la formation continue' ؟",opts:["La formation initiale","La formation continue (التكوين المستمر)","Le diplôme universitaire","Le concours de recrutement"],c:1,e:"la formation continue = التكوين المستمر / التعلم مدى الحياة"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"💼 Présentez-vous professionnellement : nom, spécialité, expérience, ambitions",
+   ref:"Entraînez-vous sur la première question d'entretien : 'Parlez-moi de vous'",
+   res:{name:"What do French people do for a living? | Super Easy French 114",url:"https://www.youtube.com/watch?v=Cg5g4MxRqAc",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'Parlez-moi de vous' ؟",opts:["Où travaillez-vous ?","Parlez-moi de vous (حدثني عن نفسك)","Quel est votre salaire ?","Quand êtes-vous disponible ?"],c:1,e:"Parlez-moi de vous = حدثني عن نفسك — أهم سؤال في المقابلة"},
+     {q:"كيف تقول 'لدي 5 سنوات خبرة' ؟",opts:["J'ai 5 ans d'expérience","J'ai 5 ans de vacances","J'ai étudié 5 ans","Je travaille depuis 5 jours"],c:0,e:"J'ai X ans d'expérience = لدي X سنوات خبرة"},
+     {q:"كيف تقول 'أعمل بشكل جيد في فريق' ؟",opts:["Je préfère travailler seul","Je travaille bien en équipe","Je refuse de collaborer","Je gère tout seul"],c:1,e:"travailler en équipe = العمل ضمن فريق — مهارة أفقية يُقدّرها أصحاب العمل"},
+     {q:"كيف تقول 'أُتقن هذه المهارة' ؟",opts:["J'ignore cette compétence","Je découvre cette compétence","J'apprends encore","Je maîtrise cette compétence"],c:3,e:"maîtriser = يُتقن — أقوى من 'connaître' (يعرف)"},
+     {q:"كيف تقول 'أنا متاح فوراً' ؟",opts:["Je serai disponible dans 6 mois","Je cherche encore","Je ne suis pas disponible","Je suis disponible immédiatement"],c:3,e:"disponible immédiatement = متاح فوراً — معلومة يطلبها المُوظِّفون"},
+     {q:"ما معنى 'mes points forts' ؟",opts:["Mes points faibles","Mes points forts (نقاط قوتي)","Mes objectifs","Mes défauts"],c:1,e:"les points forts = نقاط القوة — عكس 'les points faibles'"},
+     {q:"كيف تقول 'هدفي المهني هو...' ؟",opts:["Mon salaire actuel est...","Mon bureau est au...","Mon objectif professionnel est...","Ma formation était..."],c:2,e:"mon objectif professionnel = هدفي المهني — جملة مفتاحية في المقابلة"},
+     {q:"كيف تقول 'لدي تجربة في...' ؟",opts:["Je n'ai aucune expérience en...","J'ai une expérience dans...","Je veux apprendre...","Je refuse de travailler en..."],c:1,e:"J'ai une expérience dans = لدي تجربة في — يُستخدم في تقديم السيرة الذاتية"},
+     {q:"كيف تقول 'أنا مرن ومتكيف' ؟",opts:["Je suis rigide et inflexible","Je suis lent et hésitant","Je suis flexible et adaptable","Je suis passif et silencieux"],c:2,e:"flexible et adaptable = مرن ومتكيف — صفات يُبحث عنها في بيئات العمل الحديثة"},
+     {q:"كيف تنهي مقابلة بأدب ؟",opts:["J'ai des contraintes — je dois partir","Merci de m'avoir reçu(e)","Quand allez-vous me rappeler ?","Je n'ai plus de questions"],c:1,e:"Merci de m'avoir reçu(e) = شكراً لاستقبالكم إياي — عبارة راقية في نهاية المقابلة"},
+     {q:"كيف تقول 'لديّ الدافع والطموح' ؟",opts:["Je suis démotivé(e)","Je suis fatigué(e) de travailler","Je suis motivé(e) et ambitieux(se)","Je manque de motivation"],c:2,e:"motivé(e) et ambitieux(se) = مدفوع/ة وطموح/ة — صفات إيجابية في سياق مهني"},
+     {q:"ما معنى 'la mobilité géographique' ؟",opts:["Le déplacement professionnel temporaire","Le congé sabbatique","La mobilité géographique (الاستعداد للتنقل)","Le travail à domicile"],c:2,e:"mobilité géographique = الاستعداد للانتقال — معيار مطلوب في بعض الوظائف"}
+   ]}
+]},
+
+{day:3,title:"Voyage & Déplacements",topic:"Hôtels, aéroports et vocabulaire du voyage",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"Traveling in France — Street Interviews | Super Easy French 98",url:"https://www.youtube.com/watch?v=pHHW9bqTDsU",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'غرفة في الفندق' ؟",opts:["un billet d'avion","une carte de visite","une chambre d'hôtel","un passeport"],c:2,e:"une chambre d'hôtel = غرفة الفندق"},
+     {q:"ما معنى 'à gauche' ؟",opts:["En arrière","À droite","Tout droit","À gauche (على اليسار)"],c:3,e:"à gauche = على اليسار | à droite = على اليمين"},
+     {q:"كيف تطلب المساعدة بأدب ؟",opts:["Vite! Je suis perdu!","Je ne comprends rien","C'est trop loin","Excusez-moi, pouvez-vous m'aider ?"],c:3,e:"Excusez-moi, pouvez-vous m'aider ? = اعذرني، هل يمكنك مساعدتي؟"},
+     {q:"كيف تقول 'أنا ضائع' ؟",opts:["Je suis arrivé(e)","Je suis perdu(e)","Je connais bien la ville","Je cherche un taxi"],c:1,e:"je suis perdu(e) = أنا ضائع/ة — حالة شائعة في السفر"},
+     {q:"كيف تسأل عن موعد المغادرة ؟",opts:["À quelle heure arrive le bus ?","Où est le quai ?","Combien coûte le billet ?","À quelle heure part le train ?"],c:3,e:"À quelle heure part = في أي ساعة يغادر — conjugaison de 'partir'"},
+     {q:"ما معنى 'l'escale' ؟",opts:["L'arrivée finale","Le terminal de départ","L'escale (محطة توقف)","Le billet d'avion"],c:2,e:"une escale = توقف في الطريق — arrêt intermédiaire lors d'un vol"},
+     {q:"كيف تقول 'لقد أضعت حقائبي' ؟",opts:["J'ai trouvé mes bagages","J'ai trop de bagages","Mes bagages sont en avance","J'ai perdu mes bagages"],c:3,e:"j'ai perdu = أضعت — passé composé de 'perdre'"},
+     {q:"ما معنى 'un billet aller-retour' ؟",opts:["Un billet aller simple","Un billet aller-retour (تذكرة ذهاب وإياب)","La carte d'embarquement","Le visa de voyage"],c:1,e:"aller-retour = ذهاب وإياب | aller simple = ذهاب فقط"},
+     {q:"كيف تقول 'أريد حجز غرفة' ؟",opts:["Je veux manger","Je cherche un taxi","J'ai une chambre","Je voudrais réserver une chambre"],c:3,e:"Je voudrais réserver = أود الحجز — 'voudrais' أكثر أدباً من 'veux'"},
+     {q:"كيف تقول 'كم يكلف هذا ؟' ؟",opts:["Où est-ce ?","Quand ouvre-t-il ?","Qui travaille ici ?","Combien ça coûte ?"],c:3,e:"Combien ça coûte ? = كم يكلف هذا؟ | Combien = كم | coûter = يكلف"},
+     {q:"كيف تقول 'أين المحطة ؟' ؟",opts:["Où est la pharmacie ?","Où est l'hôpital ?","Où est la gare ?","Où est la banque ?"],c:2,e:"la gare = محطة القطار — SNCF هي شركة السكك الحديدية الفرنسية"},
+     {q:"كيف تقول 'هل هناك جولة مرشَدة ؟' ؟",opts:["Où est le restaurant ?","Y a-t-il une visite guidée ?","Quel est le prix ?","À quelle heure ferme le musée ?"],c:1,e:"une visite guidée = جولة مع مرشد — Y a-t-il = هل يوجد"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Tourisme et voyages dans le monde — RFI",url:"https://www.rfi.fr/fr/culture/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'l'industrie touristique' ؟",opts:["L'industrie technologique","L'industrie alimentaire","L'industrie touristique (صناعة السياحة)","L'industrie du bâtiment"],c:2,e:"l'industrie touristique = صناعة السياحة"},
+     {q:"كيف تقول 'حجز' ؟",opts:["une invitation","une commande","une déclaration","une réservation"],c:3,e:"une réservation = حجز | réserver = يحجز"},
+     {q:"ما معنى 'les recettes touristiques' ؟",opts:["Des recettes de cuisine","Les recettes touristiques (عائدات السياحة)","Les taxes touristiques","Les services touristiques"],c:1,e:"les recettes = العائدات أو الإيرادات | touristiques = السياحية"},
+     {q:"ما معنى 'la haute saison' ؟",opts:["La haute saison (موسم الذروة)","La basse saison","La mi-saison","Hors-saison"],c:0,e:"haute saison = موسم الذروة — الصيف في فرنسا — الأسعار أعلى والحركة أكثر"},
+     {q:"ما معنى 'l'office de tourisme' ؟",opts:["Le ministère du tourisme","L'agence de voyages","L'office de tourisme (مكتب السياحة)","L'hôtel de ville"],c:2,e:"l'office de tourisme = مكتب السياحة — نقطة استقبال للزوار"},
+     {q:"ما معنى 'le patrimoine culturel' ؟",opts:["Le parc naturel","Le patrimoine culturel (التراث الثقافي)","L'héritage financier","Les sites archéologiques"],c:1,e:"le patrimoine culturel = التراث الثقافي — المباني، التقاليد، المعرفة"},
+     {q:"كيف تقول 'نسبة إشغال الفندق' ؟",opts:["Le prix moyen","Le taux d'annulation","Le taux d'occupation","Le nombre d'étoiles"],c:2,e:"le taux d'occupation = نسبة الإشغال — نسبة الغرف المشغولة"},
+     {q:"ما معنى 'le tourisme durable' ؟",opts:["Le tourisme de masse","Le tourisme d'aventure","Le tourisme durable (السياحة المستدامة)","Le tourisme culturel"],c:2,e:"le tourisme durable = السياحة المستدامة — محترمة للبيئة والثقافات المحلية"},
+     {q:"كيف تقول 'عدد الزوار' ؟",opts:["Le budget touristique","Les hôtels disponibles","Le chiffre d'affaires","La fréquentation touristique"],c:3,e:"la fréquentation = عدد الزوار — مؤشر رئيسي في قطاع السياحة"},
+     {q:"ما معنى 'les nuitées hôtelières' ؟",opts:["Le prix d'une chambre","La durée du séjour","Les réservations annulées","Les nuitées (ليالي الإقامة)"],c:3,e:"les nuitées = ليالي الإقامة — مؤشر إحصائي في قطاع الفندقة"},
+     {q:"كيف تقول 'السياحة الداخلية' ؟",opts:["Le tourisme international","Le tourisme d'affaires","Le tourisme intérieur","Le tourisme culturel"],c:2,e:"le tourisme intérieur = السياحة الداخلية — بين مناطق نفس البلد"},
+     {q:"ما معنى 'l'hébergement' ؟",opts:["Le transport","L'hébergement (الإيواء / الإقامة)","La restauration","Les loisirs"],c:1,e:"l'hébergement = الإيواء — فنادق، شقق، مخيمات، مستأجرات قصيرة المدى"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"✈️ Décrivez votre voyage préféré ou celui dont vous rêvez en France",
+   ref:"Revoyez la vidéo : comment les Français décrivent-ils les voyages ?",
+   res:{name:"Traveling in France — Street Interviews | Super Easy French 98",url:"https://www.youtube.com/watch?v=pHHW9bqTDsU",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'زرت باريس العام الماضي' ؟",opts:["Je visite Paris demain","Je veux aller à Paris","Paris est belle","J'ai visité Paris l'année dernière"],c:3,e:"J'ai visité = passé composé — صيغة الماضي المركب"},
+     {q:"كيف تقول 'كانت رحلة رائعة' ؟",opts:["Le voyage était décevant","C'était un voyage ordinaire","Ce voyage était difficile","C'était un voyage extraordinaire"],c:3,e:"extraordinaire = رائع / استثنائي — 'C'était' = لقد كان"},
+     {q:"كيف تقول 'أحب السفر بالقطار' ؟",opts:["Je préfère l'avion","Je déteste voyager","Je voyage rarement","J'aime voyager en train"],c:3,e:"voyager en train = السفر بالقطار | j'aime = أحب"},
+     {q:"ما معنى 'se dépayser' ؟",opts:["Perdre son chemin","Oublier ses affaires","Se dépayser (تغيير الأجواء)","Manquer son vol"],c:2,e:"se dépayser = تغيير الأجواء والبيئة — الشعور بالاكتشاف في مكان جديد"},
+     {q:"كيف تقول 'لقد أُعجبت بالطعام المحلي' ؟",opts:["Je n'ai pas aimé la cuisine","J'ai adoré la cuisine locale","Je n'ai rien mangé","Je préfère la cuisine chez moi"],c:1,e:"j'ai adoré = أُعجبت جداً بـ — أقوى من 'j'ai aimé'"},
+     {q:"كيف تقول 'الترحيب كان دافئاً' ؟",opts:["L'accueil était froid","L'accueil était bruyant","L'accueil était chaleureux","L'accueil était long"],c:2,e:"chaleureux = دافئ (مجازاً) — 'un accueil chaleureux' = ترحيب دافئ"},
+     {q:"كيف تقول 'أنصح بهذا الفندق' ؟",opts:["Je déconseille cet hôtel","Je ne connais pas cet hôtel","Je veux changer d'hôtel","Je recommande cet hôtel"],c:3,e:"je recommande = أنصح بـ — 'recommander' أكثر رسمية من 'conseiller'"},
+     {q:"كيف تقول 'إقامتي دامت أسبوعاً' ؟",opts:["Mon séjour commence demain","Mon séjour a été annulé","Mon séjour était trop court","Mon séjour a duré une semaine"],c:3,e:"durer = يدوم | une semaine = أسبوع | 'mon séjour' = إقامتي"},
+     {q:"ما معنى 'le dépaysement' ؟",opts:["La nostalgie","Le choc culturel négatif","La fatigue du voyage","Le dépaysement (شعور بالانتقال إلى عالم آخر)"],c:3,e:"le dépaysement = الشعور بكونك في بيئة مختلفة — في الغالب إيجابي في السفر"},
+     {q:"كيف تقول 'أريد استكشاف المدينة سيراً على الأقدام' ؟",opts:["Je veux visiter les musées","Je préfère rester à l'hôtel","Je veux prendre le taxi","Je veux explorer la ville à pied"],c:3,e:"à pied = سيراً على الأقدام | explorer = يستكشف"},
+     {q:"كيف تقول 'اشتريت هدايا للجميع' ؟",opts:["J'ai perdu mes achats","Je n'ai rien acheté","J'ai oublié les cadeaux","J'ai acheté des souvenirs pour tout le monde"],c:3,e:"souvenirs = هدايا تذكارية | pour tout le monde = للجميع"},
+     {q:"كيف تقول 'أتمنى العودة إلى هناك يوماً ما' ؟",opts:["Je ne veux plus y retourner","Je n'ai pas aimé ce pays","J'espère y retourner un jour","J'y habite maintenant"],c:2,e:"j'espère y retourner = أتمنى العودة إليه | un jour = يوماً ما"}
+   ]}
+]},
+
+{day:4,title:"Santé & Médecine",topic:"Chez le médecin et vocabulaire médical",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"How do French people feel about healthcare? | Super Easy French 133",url:"https://www.youtube.com/watch?v=q49_QhLHbD4",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'عندي صداع' ؟",opts:["J'ai soif","J'ai faim","J'ai mal à la tête","Je suis fatigué"],c:2,e:"J'ai mal à la tête = عندي ألم في الرأس | avoir mal à = يؤلمه"},
+     {q:"ما معنى 'le médecin généraliste' ؟",opts:["Le médecin généraliste (طبيب عام)","Le médecin spécialiste","Le dentiste","Le pharmacien"],c:0,e:"le médecin généraliste = الطبيب العام | généraliste = عام"},
+     {q:"كيف تقول 'أحتاج موعداً عند الطبيب' ؟",opts:["Je veux un médicament","Je suis en bonne santé","Je n'ai pas mal","J'ai besoin d'un rendez-vous chez le médecin"],c:3,e:"J'ai besoin de = أحتاج | un rendez-vous = موعد"},
+     {q:"كيف تقول 'عندي حمى' ؟",opts:["J'ai froid","J'ai de la fièvre","Je suis fatigué","Je tousse beaucoup"],c:1,e:"avoir de la fièvre = عنده حمى — علامة شائعة لعدوى"},
+     {q:"أين تذهب في حالة طوارئ طبية في فرنسا ؟",opts:["À la pharmacie","Aux urgences","Chez le dentiste","À la mairie"],c:1,e:"les urgences = قسم الطوارئ — اتصل بـ 15 (SAMU) للطوارئ الطبية"},
+     {q:"ما معنى 'une ordonnance' ؟",opts:["La facture médicale","Le dossier médical","Une ordonnance (وصفة طبية)","Le formulaire d'admission"],c:2,e:"une ordonnance = وصفة طبية — ضرورية للحصول على أدوية معينة"},
+     {q:"كيف تقول 'أتناول هذا الدواء مرتين يومياً' ؟",opts:["Je ne prends pas de médicament","Je suis allergique à ce médicament","J'ai arrêté ce médicament","Je prends ce médicament deux fois par jour"],c:3,e:"deux fois par jour = مرتين في اليوم — تكرار علاجي شائع"},
+     {q:"ما رقم الطوارئ الطبية في فرنسا ؟",opts:["17","18","15","112"],c:2,e:"15 = SAMU (طوارئ طبية) | 17 = الشرطة | 18 = الإطفاء | 112 = الطوارئ الأوروبي"},
+     {q:"كيف تقول 'أنا مريض/ة منذ 3 أيام' ؟",opts:["Je vais mieux depuis 3 jours","Je suis malade depuis 3 jours","J'ai pris des médicaments","J'ai un rendez-vous dans 3 jours"],c:1,e:"malade depuis 3 jours = مريض/ة منذ 3 أيام | depuis = منذ"},
+     {q:"ما معنى 'les antécédents médicaux' ؟",opts:["Les médicaments actuels","Les antécédents médicaux (السوابق الطبية)","Les résultats d'analyses","Les rendez-vous futurs"],c:1,e:"les antécédents = السوابق الطبية — معلومات عن الأمراض السابقة"},
+     {q:"كيف تقول 'أنا بصحة جيدة بوجه عام' ؟",opts:["Je suis souvent malade","Je suis en bonne santé en général","J'ai beaucoup de douleurs","Je prends beaucoup de médicaments"],c:1,e:"en bonne santé en général = بصحة جيدة بوجه عام | en général = بوجه عام"},
+     {q:"ما معنى 'prévenir plutôt que guérir' ؟",opts:["Mieux vaut guérir que prévenir","La prévention est inutile","Prévenir plutôt que guérir (الوقاية خير من العلاج)","Il faut toujours prendre des médicaments"],c:2,e:"prévenir = يمنع | guérir = يشفي — مبدأ أساسي في الصحة العامة"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Santé et médecine dans le monde — RFI",url:"https://www.rfi.fr/fr/sante/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'la sécurité sociale' ؟",opts:["La police de sécurité","La sécurité sociale (الضمان الاجتماعي)","La sécurité informatique","L'assurance-vie privée"],c:1,e:"la sécurité sociale = الضمان الاجتماعي — نظام التأمين الصحي العام في فرنسا"},
+     {q:"ما معنى 'le remboursement' ؟",opts:["Le remboursement (استرداد المصاريف)","Le paiement anticipé","L'assurance privée","Les honoraires médicaux"],c:0,e:"le remboursement = استرداد المصاريف — ما تُرجعه الدولة بعد العلاج"},
+     {q:"كيف تقول 'الصحة العامة' ؟",opts:["La médecine générale","La santé privée","La santé publique","Les soins intensifs"],c:2,e:"la santé publique = الصحة العامة"},
+     {q:"ما معنى 'la mutuelle' ؟",opts:["La sécurité sociale de base","La mutuelle (التأمين التكميلي)","L'assurance-maladie complète","Le remboursement total"],c:1,e:"la mutuelle = التأمين التكميلي الخاص — يُكمّل ما لا تغطيه الدولة"},
+     {q:"ما معنى 'le désert médical' ؟",opts:["Un hôpital de campagne","Une zone sans médecins (منطقة بدون أطباء)","Un service d'urgence rural","Une clinique mobile"],c:1,e:"désert médical = منطقة تعاني من شح الأطباء — مشكلة متزايدة في ريف فرنسا"},
+     {q:"ما معنى 'l'espérance de vie' ؟",opts:["Le taux de natalité","Le taux de mortalité","Le taux de morbidité","L'espérance de vie (متوسط العمر المتوقع)"],c:3,e:"l'espérance de vie = متوسط العمر المتوقع — فرنسا من أعلى الدول في أوروبا"},
+     {q:"ما معنى 'les maladies chroniques' ؟",opts:["Les maladies aiguës","Les maladies contagieuses","Les maladies rares","Les maladies chroniques (الأمراض المزمنة)"],c:3,e:"chronique = مزمن — مثل السكري، ضغط الدم، الربو"},
+     {q:"كيف تقول 'نظام الرعاية الصحية الفرنسي متطور' ؟",opts:["Le système de santé français est en crise","Le système de santé français est performant","Le système de santé français est privatisé","Le système de santé français est inexistant"],c:1,e:"performant = فعّال / متطور — يُصنَّف النظام الصحي الفرنسي ضمن الأفضل عالمياً"},
+     {q:"ما معنى 'le taux de remboursement' ؟",opts:["Le prix des médicaments","Le taux de remboursement (نسبة التغطية)","La durée du traitement","Le diagnostic médical"],c:1,e:"taux de remboursement = نسبة ما تدفعه الدولة — تتراوح بين 15% و100% حسب العلاج"},
+     {q:"كيف تقول 'الوقاية من الأمراض' ؟",opts:["Le traitement des maladies","La guérison des maladies","La prévention des maladies","Le diagnostic des maladies"],c:2,e:"la prévention = الوقاية — أولوية في الصحة العامة الفرنسية"},
+     {q:"ما معنى 'le parcours de soins' ؟",opts:["Le remboursement des soins","L'itinéraire hospitalier","Le dossier médical","Le parcours de soins (مسار الرعاية الصحية)"],c:3,e:"parcours de soins = مسار العلاج — يبدأ بالطبيب العام ثم التخصص في فرنسا"},
+     {q:"كيف تقول 'أنا أتبع نظاماً غذائياً متوازناً' ؟",opts:["Je mange rarement","Je saute des repas souvent","Je mange équilibré","Je mange uniquement du fast-food"],c:2,e:"manger équilibré = الأكل المتوازن — توصية غذائية أساسية للصحة"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"🏥 Parlez de vos habitudes de santé et décrivez votre état de santé",
+   ref:"Revoyez la vidéo : comment les Français parlent-ils de la santé ?",
+   res:{name:"How do French people feel about healthcare? | Super Easy French 133",url:"https://www.youtube.com/watch?v=q49_QhLHbD4",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'أنا بصحة جيدة' ؟",opts:["Je suis malade","J'ai mal partout","Je souffre beaucoup","Je suis en bonne santé"],c:3,e:"Je suis en bonne santé = أنا بصحة جيدة | en bonne santé = بصحة جيدة"},
+     {q:"ما معنى 'se reposer' ؟",opts:["Se reposer (يستريح)","Courir","Manger","Boire"],c:0,e:"se reposer = يستريح — فعل انعكاسي مهم للتحدث عن العناية بالصحة"},
+     {q:"كيف تقول 'أمارس رياضة 3 مرات في الأسبوع' ؟",opts:["Je mange sainement","Je dors 8 heures","Je marche chaque jour","Je fais du sport 3 fois par semaine"],c:3,e:"fois par semaine = مرات في الأسبوع | faire du sport = يمارس رياضة"},
+     {q:"كيف تقول 'أشعر بالإرهاق' ؟",opts:["Je me sens reposé(e)","Je suis en forme","Je me sens épuisé(e)","Je suis en bonne santé"],c:2,e:"épuisé(e) = مُنهَك/ة — أقوى من 'fatigué(e)' (متعب)"},
+     {q:"كيف تقول 'أنام جيداً في الغالب' ؟",opts:["Je dors mal chaque nuit","Je ne dors jamais","Je fais des insomnies","Je dors bien en général"],c:3,e:"Je dors bien en général = أنام جيداً في الغالب | en général = في الغالب"},
+     {q:"كيف تقول 'أحتاج إلى أخذ قسط من الراحة' ؟",opts:["Je dois travailler plus","Je dois aller à l'hôpital","Je dois me reposer davantage","Je dois courir chaque matin"],c:2,e:"je dois me reposer davantage = يجب أن أرتاح أكثر | davantage = أكثر"},
+     {q:"كيف تقول 'أنا حساس للقمح' ؟",opts:["J'aime le pain","Je ne mange pas de riz","Je mange trop de gluten","Je suis intolérant(e) au gluten"],c:3,e:"intolérant(e) au gluten = حساس/ة للقمح (الغلوتين) — اضطراب غذائي شائع"},
+     {q:"كيف تقول 'العناية بالصحة النفسية مهمة' ؟",opts:["La santé mentale n'est pas importante","Il faut ignorer le stress","La santé mentale est aussi importante que la santé physique","On ne peut rien faire contre le stress"],c:2,e:"la santé mentale = الصحة النفسية — موضوع يُناقَش أكثر في المجتمع الفرنسي"},
+     {q:"كيف تقول 'أشرب كثيراً من الماء' ؟",opts:["Je bois peu d'eau","Je ne bois pas assez","Je bois beaucoup d'alcool","Je bois beaucoup d'eau"],c:3,e:"je bois beaucoup d'eau = أشرب كثيراً من الماء | boire = يشرب"},
+     {q:"كيف تقول 'أذهب للطبيب مرة في السنة' ؟",opts:["Je ne vais jamais chez le médecin","Je vais souvent aux urgences","Je vais chez le médecin une fois par an","J'évite les médecins"],c:2,e:"une fois par an = مرة في السنة — الفحص السنوي موصى به"},
+     {q:"كيف تقول 'أتجنب الأطعمة الدهنية' ؟",opts:["J'adore les plats gras","Je mange beaucoup de fast-food","Je ne fais pas attention à mon alimentation","J'évite les aliments gras"],c:3,e:"éviter = يتجنب | les aliments gras = الأطعمة الدهنية"},
+     {q:"كيف تقول 'الضغط النفسي يؤثر على صحتي' ؟",opts:["Le stress n'a aucun effet","Le stress améliore ma santé","Le stress est positif pour moi","Le stress affecte ma santé"],c:3,e:"le stress affecte ma santé = الضغط النفسي يؤثر على صحتي | affecter = يؤثر على"}
+   ]}
+]},
+
+{day:5,title:"Technologie & Innovation",topic:"Vocabulaire tech et travail numérique",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"What do French people think about Artificial Intelligence? | Super Easy French 170",url:"https://www.youtube.com/watch?v=kZeOKM0a9iY",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'الذكاء الاصطناعي' ؟",opts:["le réseau social","la technologie moderne","l'intelligence artificielle","l'informatique"],c:2,e:"l'intelligence artificielle = الذكاء الاصطناعي — يُختصر بـ IA"},
+     {q:"ما معنى 'le numérique' ؟",opts:["Le numérique (الرقمي)","Le nucléaire","Le naturel","L'industriel"],c:0,e:"le numérique = الرقمي أو الديجيتال"},
+     {q:"كيف تقول 'أعمل في قطاع التقنية' ؟",opts:["Je joue avec la technologie","Je travaille dans le secteur technologique","J'étudie la technologie","J'utilise mon téléphone"],c:1,e:"Je travaille dans le secteur = أعمل في قطاع | technologique = التقني"},
+     {q:"ما معنى 'le cloud computing' ؟",opts:["L'informatique classique","Un logiciel local","L'informatique en nuage (cloud computing)","Un réseau privé fermé"],c:2,e:"le cloud = الحوسبة السحابية — تخزين ومعالجة البيانات عن بُعد"},
+     {q:"ما معنى 'un algorithme' ؟",opts:["Un logiciel complet","Une application mobile","Une interface graphique","Une suite d'instructions pour résoudre un problème"],c:3,e:"un algorithme = مجموعة تعليمات لحل مسألة — أساس كل برنامج"},
+     {q:"ما معنى 'la cybersécurité' ؟",opts:["La cybersécurité (أمن المعلومات)","La sécurité physique","La protection de la vie privée","Le réseau informatique"],c:0,e:"la cybersécurité = أمن المعلومات — حماية الأنظمة من الهجمات"},
+     {q:"ما معنى 'les données personnelles' ؟",opts:["Les informations générales","Les données personnelles (البيانات الشخصية)","Les statistiques publiques","Les archives nationales"],c:1,e:"les données personnelles = البيانات الشخصية — محمية بـ RGPD في أوروبا"},
+     {q:"كيف تقول 'شركة ناشئة' ؟",opts:["une grande entreprise","une filiale","une start-up / une jeune pousse","une succursale"],c:2,e:"une start-up = شركة ناشئة — مبتكرة ذات إمكانية نمو عالية"},
+     {q:"ما معنى 'la transformation numérique' ؟",opts:["La révolution industrielle classique","La transition énergétique","La mondialisation","La transformation numérique (التحول الرقمي)"],c:3,e:"transformation numérique = التحول الرقمي — دمج التقنية في كل جوانب العمل"},
+     {q:"ما معنى 'RGPD' ؟",opts:["Un protocole réseau","Un logiciel de gestion","Un standard technologique","Le Règlement Général sur la Protection des Données"],c:3,e:"RGPD = GDPR — اللائحة الأوروبية لحماية البيانات الشخصية (2018)"},
+     {q:"ما معنى 'la fracture numérique' ؟",opts:["La fracture numérique (الهوة الرقمية)","Une panne informatique","Une cyberattaque","Un bug logiciel"],c:0,e:"fracture numérique = الهوة الرقمية — عدم المساواة في الوصول للتكنولوجيا"},
+     {q:"ما معنى 'le big data' ؟",opts:["Un logiciel de base de données","Une petite quantité de données","Le big data (البيانات الضخمة)","Un seul fichier très lourd"],c:2,e:"le big data = البيانات الضخمة — يُستخدم للتحليل والتنبؤ واتخاذ القرار"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Intelligence artificielle et technologie — RFI",url:"https://www.rfi.fr/fr/sciences/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'le développement durable' ؟",opts:["Le développement rapide","Le développement durable (التنمية المستدامة)","Le développement technologique","Le développement industriel"],c:1,e:"le développement durable = التنمية المستدامة — توازن بين النمو والبيئة"},
+     {q:"ما معنى 'l'innovation' ؟",opts:["L'imitation","La tradition","La réplication","L'innovation (الابتكار)"],c:3,e:"l'innovation = الابتكار — تقديم شيء جديد يُحدث تغييراً"},
+     {q:"ما معنى 'l'écosystème numérique' ؟",opts:["Un réseau simple","Un logiciel isolé","L'écosystème numérique (النظام البيئي الرقمي)","Une plateforme fermée"],c:2,e:"écosystème numérique = مجموعة الأطراف والتقنيات والخدمات الرقمية المترابطة"},
+     {q:"كيف تقول 'الملكية الفكرية' ؟",opts:["La propriété immobilière","La propriété publique","La propriété collective","La propriété intellectuelle"],c:3,e:"la propriété intellectuelle = الملكية الفكرية — براءات الاختراع، الماركات، حقوق المؤلف"},
+     {q:"ما معنى 'l'automatisation' ؟",opts:["La numérisation","L'automatisation (الأتمتة)","La robotisation totale","L'intelligence manuelle"],c:1,e:"l'automatisation = الأتمتة — استبدال المهام اليدوية بالآلات أو البرامج"},
+     {q:"ما معنى 'la French Tech' ؟",opts:["Une marque de vêtements","Un festival technologique","Un programme scolaire","L'écosystème des startups françaises"],c:3,e:"French Tech = مجتمع الشركات الناشئة الفرنسية — مبادرة حكومية لدعمها دولياً"},
+     {q:"كيف تقول 'حماية البيانات' ؟",opts:["La protection des données","La collecte des données","Le stockage des données","L'analyse des données"],c:0,e:"la protection des données = حماية البيانات — ركيزة RGPD الأوروبي"},
+     {q:"ما معنى 'le machine learning' ؟",opts:["La programmation classique","La robotique industrielle","Le calcul mathématique","L'apprentissage automatique (machine learning)"],c:3,e:"machine learning = التعلم الآلي — الذكاء الاصطناعي يتعلم من البيانات"},
+     {q:"كيف تقول 'قطاع التكنولوجيا ينمو بسرعة' ؟",opts:["Le secteur tech est en déclin","Le secteur tech se développe rapidement","Le secteur tech est stagnant","Le secteur tech a disparu"],c:1,e:"se développer rapidement = ينمو بسرعة | rapidement = بسرعة"},
+     {q:"ما معنى 'la plateformisation' ؟",opts:["La création d'une plateforme unique dominante","La diversification des canaux","La dématérialisation des services","La numérisation des archives"],c:0,e:"la plateformisation = هيمنة النماذج القائمة على المنصات — مثل Amazon, Google, Meta"},
+     {q:"كيف تقول 'أعمل في مجال الأمن السيبراني' ؟",opts:["Je travaille dans la robotique","Je travaille dans le marketing digital","Je travaille dans la cybersécurité","Je travaille dans l'intelligence artificielle"],c:2,e:"je travaille dans la cybersécurité = أعمل في مجال الأمن السيبراني — مجال في نمو مستمر"},
+     {q:"ما معنى 'le capital-risque' ؟",opts:["L'épargne personnelle","Le capital-risque (رأس المال المخاطر)","Le crédit bancaire classique","Le financement public"],c:1,e:"le capital-risque = رأس المال المخاطر — تمويل الشركات الناشئة ذات الإمكانية العالية"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"💻 Que pensez-vous de l'IA ? Comment influence-t-elle votre travail ?",
+   ref:"Revoyez la vidéo et inspirez-vous des arguments utilisés",
+   res:{name:"What do French people think about Artificial Intelligence? | Super Easy French 170",url:"https://www.youtube.com/watch?v=kZeOKM0a9iY",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'حسب رأيي' ؟",opts:["Je ne sais pas","C'est vrai","À mon avis","Peut-être"],c:2,e:"À mon avis = حسب رأيي — تعبير أساسي لإبداء الرأي"},
+     {q:"كيف تقول 'من جهة... ومن جهة أخرى' ؟",opts:["D'un côté... de l'autre côté...","Premièrement... deuxièmement...","Avant... après...","Ici... là-bas..."],c:0,e:"D'un côté = من جهة | de l'autre côté = من جهة أخرى — أداة حجاجية ممتازة"},
+     {q:"ما معنى 'l'avenir est prometteur' ؟",opts:["L'avenir est incertain","Le passé était douloureux","L'avenir est prometteur (المستقبل واعد)","L'avenir est sombre"],c:2,e:"l'avenir = المستقبل | prometteur = واعد أو مبشّر"},
+     {q:"كيف تقول 'التكنولوجيا تُسهّل حياتي' ؟",opts:["La technologie complique ma vie","Je rejette la technologie","La technologie facilite ma vie","Je vis sans technologie"],c:2,e:"faciliter = يُسهّل | 'facilite ma vie' = تُسهّل حياتي"},
+     {q:"كيف تقول 'أعتقد أن الذكاء الاصطناعي سيغيّر العالم' ؟",opts:["Je crois que l'IA est inutile","Je pense que l'IA va changer le monde","Je pense que l'IA est dangereuse","L'IA ne m'intéresse pas"],c:1,e:"je pense que = أعتقد أن — 'l'IA va changer' = المستقبل القريب"},
+     {q:"ما هي مخاطر الذكاء الاصطناعي ؟",opts:["L'IA n'a aucun risque","L'IA améliore tout","Les risques : pertes d'emplois, biais, vie privée","L'IA est parfaite"],c:2,e:"pertes d'emplois = خسائر في الوظائف | biais = تحيز | vie privée = الخصوصية"},
+     {q:"كيف تقول 'أعمل بأدوات رقمية' ؟",opts:["Je travaille sans ordinateur","Je refuse d'utiliser la tech","Je préfère le travail manuel","Je travaille avec des outils numériques"],c:3,e:"outils numériques = الأدوات الرقمية — جداول، برامج، تطبيقات، ذكاء اصطناعي"},
+     {q:"كيف تقول 'أنا متفائل بشأن مستقبل التكنولوجيا' ؟",opts:["Je suis pessimiste à propos de la tech","Je suis indifférent à la tech","Je suis contre la technologie","Je suis optimiste quant à l'avenir de la tech"],c:3,e:"optimiste quant à = متفائل بشأن | quant à = فيما يتعلق بـ"},
+     {q:"كيف تقول 'مستقبل العمل' ؟",opts:["L'histoire du travail","Les conditions actuelles","Le droit du travail","Le futur du travail"],c:3,e:"le futur du travail = مستقبل العمل — موضوع محوري مع الذكاء الاصطناعي والأتمتة"},
+     {q:"كيف تقول 'يجب تنظيم الذكاء الاصطناعي' ؟",opts:["L'IA ne doit pas être réglementée","Il faut laisser l'IA se développer librement","Il faut réguler l'intelligence artificielle","L'IA est déjà parfaitement encadrée"],c:2,e:"réguler = ينظّم | l'intelligence artificielle = الذكاء الاصطناعي"},
+     {q:"كيف تقول 'التوازن بين الإنسان والآلة مهم' ؟",opts:["Les machines doivent tout remplacer","L'équilibre entre humain et machine est important","L'humain est inutile avec les machines","Les machines sont toujours meilleures"],c:1,e:"l'équilibre = التوازن | entre = بين | important = مهم"},
+     {q:"كيف تعبر عن موقفك من التحول الرقمي ؟",opts:["Je refuse tout changement numérique","Je n'ai pas d'opinion sur le numérique","Je suis favorable à la transformation numérique","Le numérique ne me concerne pas"],c:2,e:"être favorable à = يؤيد / يدعم | la transformation numérique = التحول الرقمي"}
+   ]}
+]},
+
+{day:6,title:"Éducation & Développement personnel",topic:"Système scolaire et apprentissage continu",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"How do French people feel about school? | Super Easy French 83",url:"https://www.youtube.com/watch?v=OYCRsLnvXpI",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'apprendre' ؟",opts:["apprendre (يتعلم)","enseigner (يُعلّم)","lire (يقرأ)","écrire (يكتب)"],c:0,e:"apprendre = يتعلم | enseigner = يُعلّم — الفرق مهم جداً!"},
+     {q:"ما مراحل التعليم الفرنسي بالترتيب ؟",opts:["lycée ← collège ← école ← université","université ← lycée ← collège ← école","école ← université ← lycée ← collège","école primaire ← collège ← lycée ← université"],c:3,e:"école primaire (6-11) ← collège (11-15) ← lycée (15-18) ← université"},
+     {q:"ما معنى 'le baccalauréat' ؟",opts:["Un diplôme universitaire","Un concours d'entrée aux grandes écoles","Le baccalauréat (شهادة الثانوية)","Un diplôme professionnel"],c:2,e:"le baccalauréat = البكالوريا — شهادة نهاية الثانوي في فرنسا"},
+     {q:"ما معنى 'la laïcité à l'école' ؟",opts:["L'enseignement religieux obligatoire","La laïcité (العلمانية في المدرسة)","Les cours de philosophie","L'éducation privée"],c:1,e:"la laïcité = العلمانية — مبدأ دستوري فرنسي منذ 1905، ركيزة المدرسة الجمهورية"},
+     {q:"ما معنى 'les grandes écoles' ؟",opts:["Les grandes écoles (المدارس العليا النخبوية)","Les universités publiques","Les lycées privés","Les écoles internationales"],c:0,e:"les grandes écoles = Polytechnique, HEC, Sciences Po... — تُشكَّل النخب بمسابقات"},
+     {q:"كيف تقول 'يحفظ عن ظهر قلب' ؟",opts:["Comprendre profondément","Lire rapidement","Écouter attentivement","Apprendre par cœur"],c:3,e:"apprendre par cœur = يحفظ عن ظهر قلب — طريقة تقليدية في التعليم الفرنسي"},
+     {q:"ما معنى 'le redoublement' ؟",opts:["Sauter une classe","Le redoublement (الإعادة)","Changer d'école","Passer en avance"],c:1,e:"redoubler = يُعيد السنة الدراسية — قرار عند عدم الوصول للمستوى المطلوب"},
+     {q:"كيف تقول 'الحصول على شهادة' ؟",opts:["Échouer à un examen","Abandonner ses études","Se réorienter","Décrocher / obtenir un diplôme"],c:3,e:"décrocher un diplôme = الحصول على شهادة — 'décrocher' تعبير عامي شائع"},
+     {q:"ما معنى 'l'alternance' ؟",opts:["Les cours du soir","La formation à distance","Les cours magistraux","La formation en alternance (التكوين المزدوج)"],c:3,e:"l'alternance = التكوين المزدوج — يجمع الدراسة والعمل في الشركة"},
+     {q:"ما معنى 'le décrochage scolaire' ؟",opts:["L'absentéisme partiel","Le redoublement scolaire","L'exclusion temporaire","Le décrochage scolaire (التسرب المدرسي)"],c:3,e:"le décrochage = التسرب المدرسي — يمس 60,000 إلى 80,000 شاب في فرنسا سنوياً"},
+     {q:"ما معنى 'l'égalité des chances' ؟",opts:["La sélection par mérite","La discrimination positive","L'égalité des chances (تكافؤ الفرص)","La méritocratie absolue"],c:2,e:"l'égalité des chances = تكافؤ الفرص — مبدأ أساسي في الجمهورية الفرنسية"},
+     {q:"كيف تقول 'المنهج الدراسي' ؟",opts:["L'emploi du temps","Le carnet de notes","Le manuel scolaire","Le programme scolaire"],c:3,e:"le programme scolaire = المنهج الدراسي — يُحدَّد من طرف وزارة التربية الوطنية"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Éducation et apprentissage dans le monde — RFI",url:"https://www.rfi.fr/fr/education/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'la formation professionnelle' ؟",opts:["La formation professionnelle (التكوين المهني)","La formation universitaire","L'école primaire","L'examen final"],c:0,e:"la formation professionnelle = التكوين المهني أو التكوين المستمر"},
+     {q:"ما معنى 'l'égalité des chances' ؟",opts:["L'égalité des salaires","La justice éducative","L'égalité des chances (تكافؤ الفرص)","La liberté de choix"],c:2,e:"l'égalité des chances = تكافؤ الفرص — مبدأ أساسي في الجمهورية الفرنسية"},
+     {q:"كيف تقول 'التعلم مدى الحياة' ؟",opts:["L'école obligatoire","Les études supérieures","Le diplôme professionnel","La formation tout au long de la vie"],c:3,e:"la formation tout au long de la vie = التعلم مدى الحياة"},
+     {q:"ما معنى 'la réforme pédagogique' ؟",opts:["La réforme fiscale","La réforme sociale","La réforme pédagogique (إصلاح التعليم)","La réforme administrative"],c:2,e:"pédagogique = تربوي — يتعلق بالتعليم والتدريس"},
+     {q:"ما معنى 'les inégalités scolaires' ؟",opts:["Les inégalités scolaires (تفاوتات مدرسية)","Les différences de niveau","Les disparités régionales","Les écarts de revenus"],c:0,e:"inégalités scolaires = التفاوتات التعليمية — علاقة قوية بين الأصل الاجتماعي والنجاح"},
+     {q:"ما معنى 'la mixité sociale' في المدرسة ؟",opts:["La ségrégation scolaire","La sélection scolaire","L'élitisme","La mixité sociale (التنوع الاجتماعي)"],c:3,e:"la mixité sociale = التنوع الاجتماعي — هدف خلط التلاميذ من خلفيات مختلفة"},
+     {q:"كيف تقول 'مستوى التحصيل الدراسي' ؟",opts:["Le niveau scolaire","Le bulletin de notes","L'année scolaire","Le programme scolaire"],c:0,e:"le niveau scolaire = المستوى الدراسي — موضوع مقارنات PISA الدولية"},
+     {q:"ما معنى 'le numérique à l'école' ؟",opts:["L'éducation à distance uniquement","L'introduction des outils numériques à l'école","La suppression des manuels","La télévision éducative"],c:1,e:"le numérique à l'école = إدخال الأدوات الرقمية في المدرسة — تابلت، ENT، ressources en ligne"},
+     {q:"كيف تقول 'تقييم التلاميذ' ؟",opts:["La formation des enseignants","La politique éducative","La gestion scolaire","L'évaluation des élèves"],c:3,e:"l'évaluation des élèves = تقييم التلاميذ — نقطات، تقارير، contrôles continus"},
+     {q:"ما معنى 'l'autonomie des établissements' ؟",opts:["Le contrôle total de l'État","L'autonomie des établissements (استقلالية المؤسسات)","La privatisation des écoles","La régionalisation"],c:1,e:"l'autonomie = الاستقلالية — نقاش مستمر حول دور الدولة مقابل المدارس في فرنسا"},
+     {q:"كيف تقول 'التكوين الأولي مقابل التكوين المستمر' ؟",opts:["La formation initiale vs la formation continue","Le diplôme vs le concours","L'école vs l'université","Le public vs le privé"],c:0,e:"formation initiale = التكوين الأولي (الدراسة النظامية) vs formation continue = المستمر"},
+     {q:"ما معنى 'l'échec scolaire' ؟",opts:["La réussite scolaire","L'excellence scolaire","Le parcours scolaire","L'échec scolaire (الفشل الدراسي)"],c:3,e:"l'échec scolaire = الفشل الدراسي — موضوع نقاش سياسي متكرر في فرنسا"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"📚 Quels sont vos objectifs d'apprentissage ? Pourquoi apprenez-vous le français ?",
+   ref:"Revoyez la vidéo : comment les Français parlent-ils de l'école ?",
+   res:{name:"How do French people feel about school? | Super Easy French 83",url:"https://www.youtube.com/watch?v=OYCRsLnvXpI",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'أريد تحسين مستوى فرنسيتي' ؟",opts:["Je veux arrêter le français","Je parle couramment le français","Je n'aime pas le français","Je veux améliorer mon français"],c:3,e:"améliorer = يحسّن | mon français = فرنسيتي"},
+     {q:"كيف تقول 'أتقدم كل يوم' ؟",opts:["Je régresse chaque jour","Je stagne","Je recommence","Je progresse chaque jour"],c:3,e:"Je progresse = أتقدم | chaque jour = كل يوم"},
+     {q:"كيف تقول 'تعلم الفرنسية مفيد لمسيرتي المهنية' ؟",opts:["Le français est difficile","Je préfère l'anglais","La langue française est belle","Apprendre le français est utile pour ma carrière"],c:3,e:"utile = مفيد | ma carrière = مسيرتي المهنية"},
+     {q:"كيف تقول 'أتعلم الفرنسية منذ 6 أشهر' ؟",opts:["J'ai étudié pendant 6 mois","Je vais étudier 6 mois","J'étudierai 6 mois","J'étudie le français depuis 6 mois"],c:3,e:"depuis = منذ (للأفعال المستمرة) — 'depuis' + présent للفعل المستمر حتى الآن"},
+     {q:"كيف تقول 'أتعلم أفضل بالتطبيق' ؟",opts:["J'apprends mieux en lisant","J'apprends mieux en regardant","J'apprends mieux en mémorisant","J'apprends mieux en pratiquant"],c:3,e:"en pratiquant = بالتطبيق — صيغة الحال من 'pratiquer' | l'apprentissage actif"},
+     {q:"ما معنى 'l'immersion linguistique' ؟",opts:["Le cours de grammaire classique","La traduction simultanée","Le manuel de vocabulaire","L'immersion linguistique (الانغماس اللغوي)"],c:3,e:"l'immersion = الانغماس — أكثر الطرق فعالية حسب اللغويين"},
+     {q:"كيف تقول 'مستواي الفرنسي متوسط' ؟",opts:["Je suis débutant(e)","Je suis bilingue","Je ne parle pas français","Mon niveau de français est intermédiaire"],c:3,e:"intermédiaire = متوسط — بين المبتدئ (A1/A2) والمتقدم (C1/C2)"},
+     {q:"كيف تقول 'أجد صعوبة في فهم اللهجات' ؟",opts:["Je comprends tout parfaitement","L'accent ne me pose aucun problème","Je parle avec un accent","J'ai du mal à comprendre les accents"],c:3,e:"avoir du mal à = يجد صعوبة في — 'du mal à' + infinitif"},
+     {q:"كيف تقول 'هل يمكنك التكرار ببطء ؟' ؟",opts:["Parlez plus vite, s'il vous plaît","Je comprends très bien","Parlez en anglais","Pouvez-vous répéter plus lentement ?"],c:3,e:"plus lentement = بشكل أبطأ — ضروري للمتعلمين في محادثة حقيقية"},
+     {q:"كيف تقول 'اللغة الفرنسية تفتح لي أبواباً كثيرة' ؟",opts:["Le français est très difficile","Je n'ai pas de temps pour apprendre","Les langues ne m'intéressent pas","Le français m'ouvre de nombreuses portes"],c:3,e:"ouvrir des portes = يفتح الأبواب — استعارة شائعة للتعبير عن الفرص"},
+     {q:"كيف تقول 'أتخذ دروساً خاصة' ؟",opts:["Je suis en classe","Je passe un examen","Je révise seul(e)","Je prends des cours particuliers"],c:3,e:"cours particuliers = دروس خصوصية — شائع جداً في فرنسا للدعم الدراسي"},
+     {q:"كيف تقول 'أهدافي اللغوية هي...' ؟",opts:["Mes difficultés linguistiques sont...","Mes erreurs linguistiques sont...","Mes lacunes linguistiques sont...","Mes objectifs linguistiques sont..."],c:3,e:"mes objectifs linguistiques = أهدافي اللغوية | objectifs = أهداف"}
+   ]}
+]},
+
+{day:7,title:"Environnement & Durabilité",topic:"Enjeux climatiques et vocabulaire écologique",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"What do French people do to protect the environment? | Super Easy French 117",url:"https://www.youtube.com/watch?v=KQX-YPcHPvU",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'le réchauffement climatique' ؟",opts:["La pollution de l'air","Le réchauffement climatique (الاحترار المناخي)","Les énergies renouvelables","La sécheresse"],c:1,e:"le réchauffement climatique = الاحترار المناخي — أكبر تحديات القرن"},
+     {q:"كيف تقول 'يجب علينا أن نتصرف' ؟",opts:["Nous pouvons partir","Il est trop tard","On ne peut rien faire","Nous devons agir"],c:3,e:"Nous devons = يجب علينا (من devoir) | agir = يتصرف"},
+     {q:"ما معنى 'réduire les émissions de CO2' ؟",opts:["Augmenter la consommation","Développer l'industrie","Améliorer le transport","Réduire les émissions de CO2 (تقليل انبعاثات ثاني أكسيد الكربون)"],c:3,e:"réduire = يقلل | les émissions = الانبعاثات | CO2 = ثاني أكسيد الكربون"},
+     {q:"ما معنى 'la biodiversité' ؟",opts:["La pollution","La déforestation","L'extinction des espèces","La biodiversité (التنوع البيولوجي)"],c:3,e:"la biodiversité = التنوع البيولوجي — تنوع الكائنات الحية، ضروري لتوازن النظم البيئية"},
+     {q:"كيف تقول 'فرز النفايات' ؟",opts:["Jeter les déchets","Brûler les déchets","Enfouir les déchets","Trier les déchets"],c:3,e:"trier les déchets = فرز النفايات — ممارسة مُشجَّعة في فرنسا للتدوير"},
+     {q:"ما معنى 'l'empreinte carbone' ؟",opts:["Le bilan économique","Le score environnemental total","L'impact sur l'eau","L'empreinte carbone (البصمة الكربونية)"],c:3,e:"l'empreinte carbone = البصمة الكربونية — حجم انبعاثات CO2 لشخص أو نشاط"},
+     {q:"كيف تقول 'الطاقات المتجددة' ؟",opts:["Les énergies fossiles","Le nucléaire uniquement","Les énergies alternatives coûteuses","Les énergies renouvelables"],c:3,e:"les énergies renouvelables = الطاقات المتجددة — شمسية، ريحية، مائية..."},
+     {q:"كيف تقول 'نحتاج إلى التصرف معاً' ؟",opts:["Chacun agit seul","Il faut ignorer le problème","L'État seul peut agir","Il faut agir ensemble"],c:3,e:"agir ensemble = التصرف معاً | il faut = يجب — للتعبير عن الضرورة"},
+     {q:"ما معنى 'le développement durable' ؟",opts:["La croissance économique rapide","L'industrialisation accélérée","La mondialisation","Le développement durable (التنمية المستدامة)"],c:3,e:"développement durable = التنمية المستدامة — تلبي الاحتياجات الحالية دون المساس بحقوق الأجيال القادمة"},
+     {q:"ما معنى 'la déforestation' ؟",opts:["Le reboisement","La préservation des forêts","L'agroforesterie","La déforestation (إزالة الغابات)"],c:3,e:"la déforestation = إزالة الغابات — تهديد خطير للتنوع البيولوجي والمناخ"},
+     {q:"كيف تقول 'أنا مهتم/ة بالبيئة' ؟",opts:["L'environnement ne m'intéresse pas","Je suis contre l'écologie","Je suis indifférent(e) à la nature","Je suis sensible à l'environnement"],c:3,e:"être sensible à = مهتم بـ / يُعنى بـ — être 'sensible' à une cause = الاهتمام بها"},
+     {q:"ما معنى 'les gaz à effet de serre' ؟",opts:["Les gaz industriels","Les gaz naturels","Les gaz à effet de serre (غازات الاحتباس الحراري)","Les gaz nobles"],c:2,e:"GES = غازات الاحتباس الحراري — CO2، الميثان، N2O — مسؤولة عن الاحترار"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Environnement et transition énergétique — RFI",url:"https://www.rfi.fr/fr/planete/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'les énergies renouvelables' ؟",opts:["Le charbon et le gaz","Le nucléaire","Les énergies fossiles","Les énergies renouvelables (الطاقات المتجددة)"],c:3,e:"les énergies renouvelables = الطاقات المتجددة (شمسية، ريحية...)"},
+     {q:"ما معنى 'la transition énergétique' ؟",opts:["La crise énergétique","La hausse des prix","La coupure d'électricité","La transition énergétique (الانتقال الطاقوي)"],c:3,e:"la transition énergétique = الانتقال نحو مصادر طاقة نظيفة"},
+     {q:"كيف تقول 'البصمة الكربونية' ؟",opts:["la pollution atmosphérique","le changement climatique","la déforestation","l'empreinte carbone"],c:3,e:"l'empreinte carbone = البصمة الكربونية — حجم انبعاثات ثاني أكسيد الكربون"},
+     {q:"ما معنى 'la sobriété énergétique' ؟",opts:["L'efficacité énergétique","La sobriété énergétique (الترشيد الطاقوي)","La transition énergétique","L'indépendance énergétique"],c:1,e:"sobriété énergétique = الترشيد الطاقوي — تقليل الاستهلاك الإجمالي"},
+     {q:"ما معنى 'l'Accord de Paris' ؟",opts:["Un accord commercial bilatéral","Un traité militaire","Un accord d'immigration","L'Accord de Paris sur le climat (2015)"],c:3,e:"l'Accord de Paris = اتفاقية باريس (2015) — تهدف للحد من الاحترار دون 1.5 درجة"},
+     {q:"ما معنى 'les panneaux solaires' ؟",opts:["Les éoliennes","Les barrages","Les centrales nucléaires","Les panneaux solaires (الألواح الشمسية)"],c:3,e:"panneaux solaires = الألواح الشمسية — تحول ضوء الشمس إلى كهرباء"},
+     {q:"كيف تقول 'الميزانية الكربونية' ؟",opts:["Le budget carbone","Le bilan écologique","Le score vert","La taxe carbone"],c:0,e:"le budget carbone = الميزانية الكربونية — الحد الأقصى المسموح به من انبعاثات CO2"},
+     {q:"ما معنى 'le mix énergétique' ؟",opts:["Un carburant composé","Un mélange de polluants","Le mix énergétique (مزيج مصادر الطاقة)","Un gaz naturel liquéfié"],c:2,e:"mix énergétique = مزيج مصادر الطاقة — نووي، متجدد، أحفوري — يختلف حسب البلد"},
+     {q:"ما معنى 'la compensation carbone' ؟",opts:["La réduction directe","La capture carbone","La neutralité carbone immédiate","La compensation carbone (تعويض الكربون)"],c:3,e:"compensation carbone = تعويض الكربون — تمويل مشاريع تقلل CO2 لتعويض انبعاثاتك"},
+     {q:"كيف تقول 'فرنسا تعتمد كثيراً على الطاقة النووية' ؟",opts:["La France refuse le nucléaire","La France abandonne le nucléaire","La France importe toute son énergie","La France dépend fortement du nucléaire"],c:3,e:"dépendre fortement de = يعتمد كثيراً على — فرنسا تحصل على ~70% من كهربائها من النووي"},
+     {q:"ما معنى 'l'éco-conception' ؟",opts:["Le recyclage post-production","La réutilisation","La biodégradation","L'éco-conception (التصميم البيئي)"],c:3,e:"l'éco-conception = دمج الأثر البيئي في تصميم المنتج من البداية"},
+     {q:"كيف تقول 'الاستثمار في الطاقات المتجددة ضروري' ؟",opts:["Il faut éviter les énergies renouvelables","Les énergies renouvelables sont trop chères","Il faut investir dans les énergies renouvelables","Les renouvelables ne sont pas efficaces"],c:2,e:"il faut investir dans = يجب الاستثمار في — 'il faut' + infinitif = ضرورة"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"🌍 Que faites-vous pour protéger l'environnement ? Quel est votre avis sur les politiques climatiques ?",
+   ref:"Revoyez la vidéo : les Français et l'environnement — inspirez-vous de leurs expressions",
+   res:{name:"What do French people do to protect the environment? | Super Easy French 117",url:"https://www.youtube.com/watch?v=KQX-YPcHPvU",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'سأُعيد التدوير أكثر' ؟",opts:["J'ai recyclé hier","Je recycle toujours","Je ne recycle pas","Je vais recycler davantage"],c:3,e:"Je vais + infinitif = المستقبل القريب | davantage = أكثر"},
+     {q:"كيف تقول 'أعتقد أن...' ؟",opts:["Je sais que...","Je dis que...","Je veux que...","Je pense que..."],c:3,e:"Je pense que = أعتقد أن — من أكثر تعابير الرأي استخداماً"},
+     {q:"ما معنى 'agir ensemble pour la planète' ؟",opts:["Parler de l'environnement","Atteindre la durabilité","Protéger les animaux","Agir ensemble pour la planète (التصرف معاً من أجل الكوكب)"],c:3,e:"agir = يتصرف | ensemble = معاً | la planète = الكوكب"},
+     {q:"كيف تقول 'أنا مع الطاقات المتجددة' ؟",opts:["Je m'oppose aux énergies vertes","Je préfère les énergies fossiles","Je suis indifférent à l'énergie","Je soutiens les énergies renouvelables"],c:3,e:"soutenir = يدعم / يؤيد — 'je soutiens' = مضارع من 'soutenir'"},
+     {q:"كيف تقول 'يجب التصرف الآن' ؟",opts:["Il est trop tard","On peut attendre","Ce n'est pas urgent","Il faut agir maintenant"],c:3,e:"il faut agir maintenant = يجب التصرف الآن — 'il faut' + infinitif = ضرورة"},
+     {q:"كيف تقول 'أُقلّل من بصمتي الكربونية' ؟",opts:["J'augmente ma consommation","Je voyage en avion souvent","Je consomme de la viande quotidiennement","Je réduis mon empreinte carbone"],c:3,e:"réduire son empreinte carbone = تقليل بصمتك الكربونية — أكل أقل للحوم، تنقل أخضر..."},
+     {q:"كيف تقول 'أنا مع...' ؟",opts:["Je suis contre...","Je suis indifférent à...","Je m'oppose à...","Je suis en faveur de..."],c:3,e:"être en faveur de = يؤيد — مرادف لـ 'soutenir' أو 'être pour'"},
+     {q:"كيف تقول 'يجب علينا تغيير عاداتنا' ؟",opts:["Nous pouvons ignorer ce problème","Nous refusons de changer","Nous n'avons pas à changer","Nous devons changer nos habitudes"],c:3,e:"devoir + infinitif = يجب علينا | nos habitudes = عاداتنا"},
+     {q:"كيف تقول 'في رأيي، الحل هو...' ؟",opts:["Selon les experts...","D'après les chiffres...","En conclusion...","À mon avis, la solution est..."],c:3,e:"à mon avis = في رأيي — يُستخدم للتعبير عن الرأي الشخصي المباشر"},
+     {q:"كيف تقول 'البيئة تخصنا جميعاً' ؟",opts:["L'environnement est un problème lointain","L'environnement ne me concerne pas","L'environnement est un problème d'État","L'environnement nous concerne tous"],c:3,e:"concerner = يخص | nous concerne tous = يخصنا جميعاً"},
+     {q:"كيف تقول 'أُفضّل المنتجات المحلية والموسمية' ؟",opts:["Je mange uniquement importé","Je ne fais pas attention à l'origine","Je préfère les produits exotiques","Je préfère les produits locaux et de saison"],c:3,e:"locaux et de saison = محلي وموسمي — يُقلل من بصمة الكربون للغذاء"},
+     {q:"كيف تقول 'المستقبل يعتمد على أفعالنا اليوم' ؟",opts:["Le futur ne dépend pas de nous","Nos actions n'ont aucun impact","Il est trop tard pour changer","L'avenir dépend de nos actions aujourd'hui"],c:3,e:"dépendre de = يعتمد على | nos actions = أفعالنا | aujourd'hui = اليوم"}
+   ]}
+]},
+
+{day:8,title:"Économie & Finance",topic:"Finances personnelles et économie mondiale",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"How do French people manage their money? | Super Easy French 143",url:"https://www.youtube.com/watch?v=QcWVTGGCaGQ",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'en hausse / en baisse' ؟",opts:["En stabilité / En crise","En hausse / En baisse (في ارتفاع / في انخفاض)","Bénéfice / Perte","Lent / Rapide"],c:1,e:"en hausse = في ارتفاع | en baisse = في انخفاض — مصطلحان أساسيان"},
+     {q:"ما معنى 'épargner de l'argent' ؟",opts:["Dépenser l'argent","Emprunter l'argent","Investir l'argent","Épargner l'argent (توفير المال)"],c:3,e:"épargner = يوفر / يدخر | l'épargne = المدخرات"},
+     {q:"كيف تقول 'الراتب الشهري' ؟",opts:["Le salaire annuel","Le salaire hebdomadaire","La prime mensuelle","Le salaire mensuel"],c:3,e:"mensuel = شهري (من le mois) | annuel = سنوي (من l'an)"},
+     {q:"ما معنى 'le budget' ؟",opts:["Le compte bancaire","Le budget (الميزانية)","L'investissement","Le bilan"],c:1,e:"le budget = الميزانية — خطة مالية تحدد الإيرادات والمصاريف"},
+     {q:"كيف تقول 'أنا مديون/ة' (في العجز) ؟",opts:["Je suis dans le vert","Je suis à l'équilibre","J'ai des économies","Je suis dans le rouge / en dette"],c:3,e:"être dans le rouge = في العجز / مديون — تعبير مالي اصطلاحي شائع"},
+     {q:"ما معنى 'le virement bancaire' ؟",opts:["Le retrait d'argent","Le dépôt d'espèces","Le prêt bancaire","Le virement bancaire (التحويل البنكي)"],c:3,e:"un virement bancaire = تحويل بنكي — طريقة دفع شائعة جداً في فرنسا"},
+     {q:"ما معنى 'la retraite' ؟",opts:["Le chômage","Le congé maladie","Les vacances","La retraite (التقاعد / راتب التقاعد)"],c:3,e:"la retraite = التقاعد — سن التقاعد القانوني في فرنسا: 64 سنة منذ إصلاح 2023"},
+     {q:"كيف تقول 'قرض عقاري' ؟",opts:["Un crédit à la consommation","Une assurance-vie","Un compte d'épargne","Un emprunt immobilier / prêt hypothécaire"],c:3,e:"un emprunt immobilier = قرض عقاري — لشراء عقار بدفع أقساط للبنك"},
+     {q:"ما معنى 'le taux d'épargne' ؟",opts:["Le taux d'intérêt","Le taux d'inflation","Le taux de change","Le taux d'épargne (معدل الادخار)"],c:3,e:"le taux d'épargne = معدل الادخار — % من الدخل يُدَّخر — فرنسا من أعلى الدول عالمياً"},
+     {q:"كيف تقول 'أريد فتح حساب بنكي' ؟",opts:["Je veux fermer mon compte","Je veux changer de banque","Je veux retirer de l'argent","Je veux ouvrir un compte bancaire"],c:3,e:"ouvrir un compte = فتح حساب — الخطوة الأولى للتعامل البنكي في فرنسا"},
+     {q:"ما معنى 'le patrimoine financier' ؟",opts:["Le revenu mensuel","La dette personnelle","Le salaire brut","Le patrimoine (الثروة / الأصول المالية)"],c:3,e:"le patrimoine = الثروة / الأصول — مجموع ما يملكه الشخص"},
+     {q:"كيف تقول 'أُريد توفير للمستقبل' ؟",opts:["Je veux dépenser tout mon argent","Je n'ai pas de plan financier","Je veux m'endetter","Je veux épargner pour l'avenir"],c:3,e:"épargner pour l'avenir = توفير من أجل المستقبل — هدف مالي أساسي"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Économie mondiale: actualités et analyses — RFI",url:"https://www.rfi.fr/fr/economie/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'le PIB (Produit Intérieur Brut)' ؟",opts:["Le PIB (الناتج المحلي الإجمالي)","Le revenu national","Les exportations","Les investissements étrangers"],c:0,e:"le PIB = الناتج المحلي الإجمالي (GDP) — مقياس حجم الاقتصاد"},
+     {q:"ما معنى 'l'investissement étranger' ؟",opts:["L'investissement étranger (الاستثمار الأجنبي)","La dette extérieure","Les exportations","Les importations"],c:0,e:"l'investissement étranger = الاستثمار الأجنبي — يجذب الشركات الدولية"},
+     {q:"كيف تقول 'من جهة أخرى' ؟",opts:["d'abord","ensuite","finalement","d'autre part"],c:3,e:"d'une part = من جهة | d'autre part = من جهة أخرى — مفيد في النقاش والتحليل"},
+     {q:"ما معنى 'l'inflation' ؟",opts:["La déflation","La stagflation","La désinflation","L'inflation (التضخم)"],c:3,e:"l'inflation = التضخم — ارتفاع عام ودائم في الأسعار يُقلل القدرة الشرائية"},
+     {q:"ما معنى 'le pouvoir d'achat' ؟",opts:["Le pouvoir de vente","La capacité d'épargne","Le pouvoir d'achat (القدرة الشرائية)","La richesse nationale"],c:2,e:"pouvoir d'achat = القدرة الشرائية — ما يمكن شراؤه بالدخل المتاح"},
+     {q:"ما معنى 'la dette publique' ؟",opts:["La dette privée","La dette des entreprises","La dette des ménages","La dette publique (الدين العام)"],c:3,e:"dette publique = ما تديه الدولة — تجاوزت 110% من الناتج في فرنسا"},
+     {q:"كيف تقول 'النمو الاقتصادي' ؟",opts:["La récession","La stagnation","La contraction","La croissance économique"],c:3,e:"la croissance = النمو الاقتصادي — يُقاس بمعدل تغير الناتج المحلي"},
+     {q:"ما معنى 'le déficit budgétaire' ؟",opts:["L'excédent budgétaire","L'équilibre budgétaire","La dette souveraine","Le déficit budgétaire (عجز الميزانية)"],c:3,e:"déficit budgétaire = عجز الميزانية — حين تتجاوز النفقات الإيرادات"},
+     {q:"ما معنى 'le taux de change' ؟",opts:["Le taux d'intérêt","Le taux d'inflation","Le taux de change (سعر الصرف)","Le taux d'imposition"],c:2,e:"le taux de change = سعر الصرف — قيمة عملة مقابل أخرى (EUR/USD مثلاً)"},
+     {q:"ما معنى 'les dépenses publiques' ؟",opts:["Les recettes fiscales","Le budget prévisionnel","Les investissements privés","Les dépenses publiques (الإنفاق الحكومي)"],c:3,e:"dépenses publiques = الإنفاق الحكومي — صحة، تعليم، دفاع، تقاعدات..."},
+     {q:"كيف تقول 'الاستثمار في البورصة' ؟",opts:["J'épargne à la banque","Je dépense mon argent","Je fais un emprunt","J'investis en bourse"],c:3,e:"j'investis en bourse = أستثمر في البورصة | en bourse = في سوق الأسهم"},
+     {q:"كيف تقول 'تنويع المحفظة الاستثمارية' ؟",opts:["Mettre tout dans un seul actif","Éviter la bourse","Thésauriser uniquement","Diversifier ses placements"],c:3,e:"diversifier ses placements = تنويع الاستثمارات — لا تضع كل البيض في سلة واحدة"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"💰 Parlez de vos objectifs financiers et de la gestion de votre budget",
+   ref:"Revoyez la vidéo : les Français et la gestion de l'argent",
+   res:{name:"How do French people manage their money? | Super Easy French 143",url:"https://www.youtube.com/watch?v=QcWVTGGCaGQ",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'أريد توفير 20% من راتبي' ؟",opts:["Je veux dépenser plus","Je veux un prêt","Je veux changer de travail","Je veux économiser 20% de mon salaire"],c:3,e:"économiser = يوفر | mon salaire = راتبي | 20% = عشرون بالمئة"},
+     {q:"كيف تقول 'الراتب المرغوب / المتوقع' ؟",opts:["Le salaire minimum","Le salaire brut","Le salaire net","Le salaire souhaité"],c:3,e:"souhaité = مرغوب فيه | brut = إجمالي | net = صافٍ"},
+     {q:"كيف تقول 'أستثمر في البورصة' ؟",opts:["J'épargne à la banque","Je dépense mon argent","Je fais un emprunt","J'investis en bourse"],c:3,e:"j'investis = أستثمر | en bourse = في البورصة / أسواق الأسهم"},
+     {q:"كيف تقول 'أُحكم إدارة ميزانيتي' ؟",opts:["Je dépense sans compter","Je n'ai pas de budget","Je m'endette chaque mois","Je gère bien mon budget"],c:3,e:"gérer bien = يُحكم إدارة | mon budget = ميزانيتي"},
+     {q:"كيف تقول 'لديّ أهداف مالية واضحة' ؟",opts:["Je n'ai aucun objectif","Je dépense au jour le jour","Je ne pense pas à l'avenir","J'ai des objectifs financiers clairs"],c:3,e:"des objectifs financiers clairs = أهداف مالية واضحة | clair = واضح"},
+     {q:"كيف تقول 'أريد شراء منزل خلال 5 سنوات' ؟",opts:["Je veux louer pour toujours","Je n'ai pas de projet immobilier","Je veux déménager à l'étranger","Je veux acheter une maison dans 5 ans"],c:3,e:"acheter une maison dans 5 ans = شراء منزل خلال 5 سنوات — هدف مالي طويل المدى"},
+     {q:"كيف تقول 'أتجنب الديون غير الضرورية' ؟",opts:["Je m'endette facilement","J'emprunte souvent","J'évite les dettes inutiles","Je dépense à crédit"],c:2,e:"éviter les dettes inutiles = تجنب الديون غير الضرورية — مبدأ مالي صحيح"},
+     {q:"كيف تقول 'أُفضّل الاستثمار على المدى الطويل' ؟",opts:["Je préfère le court terme","Je refuse d'investir","Je garde mes liquidités","Je préfère investir à long terme"],c:3,e:"à long terme = على المدى الطويل — أفق 5 سنوات أو أكثر، موصى به للأسهم"},
+     {q:"كيف تقول 'الرسوم البنكية مرتفعة' ؟",opts:["Les frais bancaires sont gratuits","Les frais bancaires sont négligeables","Les frais bancaires sont bas","Les frais bancaires sont élevés"],c:3,e:"les frais bancaires = الرسوم البنكية | élevés = مرتفعة — عامل مهم عند اختيار البنك"},
+     {q:"كيف تتحدث عن مشروعك المالي المستقبلي ؟",opts:["Je n'ai aucun projet","Je vis au jour le jour","Je n'ai pas encore réfléchi","Dans 10 ans, je souhaite avoir constitué un patrimoine solide"],c:3,e:"constituer un patrimoine = بناء ثروة — هدف مالي بعيد المدى"},
+     {q:"ما معنى 'le Livret A' ؟",opts:["Une action en bourse","Un crédit immobilier","Une assurance-vie","Un compte d'épargne réglementé par l'État"],c:3,e:"le Livret A = حساب ادخاري تُنظّمه الدولة — بدون ضرائب، ذو معدل مضمون"},
+     {q:"كيف تقول 'الاستقلال المالي هو هدفي' ؟",opts:["Je veux rester dépendant","Je n'ai pas de rêve financier","L'argent ne m'intéresse pas","L'indépendance financière est mon objectif"],c:3,e:"l'indépendance financière = الاستقلال المالي — أن تعيش من دخل استثماراتك"}
+   ]}
+]},
+
+{day:9,title:"Politique & Société",topic:"Débats civiques et vocabulaire politique",
+phases:[
+  {type:"listen",label:"Écoute",dur:60,
+   res:{name:"What do French people think about politics? | Super Easy French 108",url:"https://www.youtube.com/watch?v=FpMRKAloVG8",icon:"▶️"},
+   quiz:[
+     {q:"ما معنى 'les élections présidentielles' ؟",opts:["Les élections municipales","Les élections législatives","Le vote populaire","Les élections présidentielles (الانتخابات الرئاسية)"],c:3,e:"les élections présidentielles = الانتخابات الرئاسية — كل 5 سنوات في فرنسا"},
+     {q:"ما هو الشعار الثلاثي لفرنسا ؟",opts:["Vive la France, vive la République","Un pour tous, tous pour un","La France d'abord","Liberté, Égalité, Fraternité"],c:3,e:"Liberté, Égalité, Fraternité = حرية، مساواة، إخاء — شعار الجمهورية الفرنسية"},
+     {q:"ما معنى 'le gouvernement' ؟",opts:["Le gouvernement (الحكومة)","Le parlement","La présidence","La justice"],c:0,e:"le gouvernement = الحكومة | le parlement = البرلمان | la présidence = الرئاسة"},
+     {q:"ما معنى 'le suffrage universel' ؟",opts:["Le vote censitaire","Le suffrage universel (الاقتراع العام)","Le vote par procuration","L'abstention"],c:1,e:"suffrage universel = كل المواطنين البالغين يصوتون — مكتسب نهائي في فرنسا منذ 1944"},
+     {q:"ما معنى 'la séparation des pouvoirs' ؟",opts:["La concentration du pouvoir","L'union des forces","La centralisation","La séparation des pouvoirs (الفصل بين السلطات)"],c:3,e:"séparation des pouvoirs = التنفيذية، التشريعية، القضائية — مبدأ مونتسكيو"},
+     {q:"كيف تقول 'حق التصويت' ؟",opts:["Le devoir civique","La liberté d'expression","Le droit à l'éducation","Le droit de vote"],c:3,e:"le droit de vote = حق التصويت — في فرنسا من سن 18 سنة"},
+     {q:"ما معنى 'l'Assemblée nationale' ؟",opts:["Le Sénat","Le Conseil constitutionnel","Le Conseil d'État","L'Assemblée nationale (الجمعية الوطنية)"],c:3,e:"l'Assemblée nationale = الغرفة الأولى للبرلمان — 577 نائباً منتخباً مباشرة"},
+     {q:"ما معنى 'la République' ؟",opts:["La Monarchie","La Démocratie directe","La République (الجمهورية)","La Théocratie"],c:2,e:"la République française = جمهورية فرنسا — الجمهورية الخامسة منذ 1958"},
+     {q:"ما معنى 'les partis politiques' ؟",opts:["Les partis politiques (الأحزاب السياسية)","Les syndicats","Les associations","Les lobbies"],c:0,e:"les partis politiques = الأحزاب السياسية — تمثل أيديولوجيات وبرامج حكومية مختلفة"},
+     {q:"ما معنى 'la motion de censure' ؟",opts:["Un vote de soutien","La motion de censure (ملتمس الرقابة)","Un référendum","Une dissolution"],c:1,e:"motion de censure = إسقاط الحكومة — إذا صوّت عليها البرلمان تستقيل الحكومة"},
+     {q:"ما معنى 'l'État de droit' ؟",opts:["L'État arbitraire","La justice populaire","L'État policier","L'État de droit (دولة القانون)"],c:3,e:"l'État de droit = الجميع خاضع للقانون بما فيهم الحكومة — ركيزة الديمقراطية"},
+     {q:"كيف تقول 'المشاركة المدنية' ؟",opts:["L'indifférence politique","La participation civique","L'abstentionnisme","Le vote blanc"],c:1,e:"la participation civique = المشاركة المدنية — أساس الديمقراطية الفاعلة"}
+   ]},
+  {type:"read",label:"Lecture",dur:60,
+   res:{name:"Politique et société — Revue de presse RFI",url:"https://www.rfi.fr/fr/revue-de-presse/",icon:"📰"},
+   quiz:[
+     {q:"ما معنى 'les droits de l'homme' ؟",opts:["Les droits de l'homme (حقوق الإنسان)","Les droits des femmes","Les droits des travailleurs","Les droits du citoyen"],c:0,e:"les droits de l'homme = حقوق الإنسان بشكل عام"},
+     {q:"ما معنى 'l'opinion publique' ؟",opts:["L'opinion publique (الرأي العام)","L'opinion privée","Le sondage","Le vote"],c:0,e:"l'opinion publique = الرأي العام"},
+     {q:"كيف تقول 'وفق الاستطلاعات...' ؟",opts:["D'après les experts...","En conclusion...","Par conséquent...","Selon les sondages..."],c:3,e:"selon / d'après = وفق / حسب | les sondages = الاستطلاعات"},
+     {q:"ما معنى 'le débat public' ؟",opts:["La consultation privée","La délibération interne","La négociation secrète","Le débat public (النقاش العام)"],c:3,e:"débat public = نقاش عام ومفتوح — ركيزة الديمقراطية السليمة"},
+     {q:"ما معنى 'les réformes sociales' ؟",opts:["Les réformes fiscales","Les réformes militaires","Les réformes éducatives","Les réformes sociales (الإصلاحات الاجتماعية)"],c:3,e:"réformes sociales = تغييرات في الحماية الاجتماعية وقانون العمل — مصدر توترات في فرنسا"},
+     {q:"ما معنى 'la majorité parlementaire' ؟",opts:["L'opposition","La coalition","La majorité parlementaire (الأغلبية البرلمانية)","Le groupe minoritaire"],c:2,e:"majorité parlementaire = أغلبية تفوق 50% من المقاعد — ضرورية للحكم"},
+     {q:"ما معنى 'la diplomatie' ؟",opts:["La guerre","Le commerce international","La propagande","La diplomatie (الدبلوماسية)"],c:3,e:"la diplomatie = إدارة العلاقات الدولية عبر التفاوض وليس القوة"},
+     {q:"ما معنى 'les libertés fondamentales' ؟",opts:["Les règles de politesse","Les codes sociaux","Les normes culturelles","Les libertés fondamentales (الحريات الأساسية)"],c:3,e:"libertés fondamentales = حرية الصحافة، التجمع، التعبير، الضمير..."},
+     {q:"ما معنى 'la cohésion sociale' ؟",opts:["La division sociale","L'exclusion sociale","La marginalisation","La cohésion sociale (التماسك الاجتماعي)"],c:3,e:"cohésion sociale = الشعور بالانتماء لمجتمع واحد — التضامن بين المواطنين"},
+     {q:"ما معنى 'l'abstention' ؟",opts:["Le vote blanc","Le vote nul","L'abstention (الامتناع عن التصويت)","Le double vote"],c:2,e:"l'abstention = الامتناع عن التصويت — ظاهرة متزايدة في الانتخابات الفرنسية"},
+     {q:"ما معنى 'la laïcité de l'État' ؟",opts:["L'État religieux","L'État confessionnel","L'État neutre","La laïcité (علمانية الدولة)"],c:3,e:"laïcité = الدولة لا تعترف بأي دين رسمياً — مبدأ فرنسي منذ 1905"},
+     {q:"كيف تقول 'الحق في الاعتراض' ؟",opts:["L'obligation d'obéir","Le droit de se taire","Le droit à l'ignorance","Le droit à la contestation"],c:3,e:"le droit à la contestation = حق الاعتراض — يشمل التظاهر، الإضراب، النقد"}
+   ]},
+  {type:"speak",label:"Expression orale",dur:60,
+   topic:"🗳️ Quel est votre avis sur une question sociale qui vous tient à cœur ?",
+   ref:"Revoyez la vidéo : comment les Français expriment-ils leurs opinions politiques ?",
+   res:{name:"What do French people think about politics? | Super Easy French 108",url:"https://www.youtube.com/watch?v=FpMRKAloVG8",icon:"▶️"},
+   quiz:[
+     {q:"كيف تقول 'أتفق مع هذا الرأي' ؟",opts:["Je suis contre cette idée","Je n'ai pas d'opinion","Je doute de tout","Je suis d'accord avec cette opinion"],c:3,e:"Je suis d'accord avec = أتفق مع | contre = ضد"},
+     {q:"كيف تقول 'في الخلاصة' ؟",opts:["En introduction","Par exemple","C'est-à-dire","En conclusion"],c:3,e:"En conclusion = في الخلاصة — لإنهاء خطابك أو عرضك"},
+     {q:"كيف تقول 'هذه مشكلة حقيقية تستحق الاهتمام' ؟",opts:["C'est sans importance","Il n'y a pas de problème","On s'en fiche","C'est un vrai problème qui mérite attention"],c:3,e:"C'est un vrai problème = هذه مشكلة حقيقية | qui mérite = التي تستحق"},
+     {q:"كيف تقول 'أصوّت في كل انتخابات' ؟",opts:["Je ne vote jamais","Je m'abstiens souvent","Je n'ai pas le droit de voter","Je vote à chaque élection"],c:3,e:"voter = يصوّت | à chaque élection = في كل انتخابات"},
+     {q:"كيف تقول 'أُدافع عن حرية التعبير' ؟",opts:["Je censure les discours","Je limite les débats","Je refuse le dialogue","Je défends la liberté d'expression"],c:3,e:"défendre = يدافع عن | liberté d'expression = حرية التعبير"},
+     {q:"كيف تقول 'من المهم احترام الآراء المختلفة' ؟",opts:["Il faut imposer ses idées","Il faut ignorer les autres","Il faut censurer les opposants","Il est important de respecter les opinions différentes"],c:3,e:"il est important de = من المهم أن | respecter = يحترم"},
+     {q:"كيف تقول 'أنا منخرط/ة مدنياً' ؟",opts:["Je suis indifférent(e)","Je suis cynique","Je suis désabusé(e)","Je suis engagé(e) civiquement"],c:3,e:"engagé(e) civiquement = منخرط/ة مدنياً — مواطن فاعل في الحياة العامة"},
+     {q:"كيف تقول 'أنا ضد الفساد' ؟",opts:["Je tolère la corruption","La corruption m'est égale","Je profite de la corruption","Je suis contre la corruption"],c:3,e:"être contre = يعارض | la corruption = الفساد"},
+     {q:"كيف تقول 'الديمقراطية ناقصة لكنها ضرورية' ؟",opts:["La démocratie est parfaite","La démocratie est inutile","On doit abolir la démocratie","La démocratie est imparfaite mais indispensable"],c:3,e:"imparfaite mais indispensable = ناقصة لكن ضرورية — قولة تشرشل الشهيرة"},
+     {q:"كيف تقول 'يجب الاستماع لجميع الأطراف' ؟",opts:["Il faut ignorer les minorités","Une seule opinion compte","Il ne faut pas débattre","Il faut écouter toutes les parties"],c:3,e:"écouter toutes les parties = الاستماع لجميع الأطراف — مبدأ التعددية الديمقراطية"},
+     {q:"كيف تقول 'أنا له رأي مختلف' ؟",opts:["Je suis d'accord avec tout","Je n'ai pas d'avis","J'évite les débats","J'ai un point de vue différent"],c:3,e:"j'ai un point de vue différent = لديّ وجهة نظر مختلفة — تعبير مؤدب عن الاختلاف"},
+     {q:"كيف تقول 'النقاش السياسي ضروري للديمقراطية' ؟",opts:["Le débat politique est inutile","La politique ne concerne pas les citoyens","Il vaut mieux éviter les débats","Le débat politique est nécessaire pour la démocratie"],c:3,e:"le débat politique est nécessaire = النقاش السياسي ضروري — يُغذّي الحياة الديمقراطية"}
+   ]}
+]},
+
+{day:10,title:"Grande Révision — Examen final",topic:"Synthèse des 30 heures + test complet",
+phases:[
+  {type:"listen",label:"Révision Écoute",dur:60,
+   res:{name:"We Try The Most Popular French Snacks! | Super Easy French 156",url:"https://www.youtube.com/watch?v=xTy21_vWZjY",icon:"▶️"},
+   quiz:[
+     {q:"من أي قناة يوتيوب كانت جميع حصص الاستماع ؟",opts:["Learn French with Alexa","Français avec Pierre","Coffee Break French","Easy French (Super Easy French)"],c:3,e:"Easy French / Super Easy French — قناة رائعة للمتعلمين بمقابلات شارعية حقيقية"},
+     {q:"كم ساعة استماع في 9 أيام ؟",opts:["3 ساعات","6 ساعات","12 ساعة","9 ساعات"],c:3,e:"60 دقيقة × 9 أيام = 9 ساعات من الاستماع!"},
+     {q:"ما أفضل طريقة لمواصلة التحسن ؟",opts:["قراءة القواعد فقط","حفظ قوائم الكلمات","الانتظار لدورة أخرى","مواصلة مشاهدة Easy French يومياً"],c:3,e:"الاستمرارية مع محتوى حقيقي هي الطريقة المثلى!"},
+     {q:"كيف تقول 'لقد أنهيت البرنامج' ؟",opts:["Je vais commencer","Je suis en train d'apprendre","Je n'ai pas fini","J'ai terminé le programme"],c:3,e:"J'ai terminé = لقد أنهيت — الماضي المركب من terminer"},
+     {q:"ما معنى 'consolider ses acquis' ؟",opts:["Oublier ce qu'on a appris","Recommencer depuis le début","Changer de méthode","Consolider ses acquis (ترسيخ ما تعلمته)"],c:3,e:"consolider ses acquis = ترسيخ المكتسبات — خطوة أساسية في أي تعلم"},
+     {q:"ما معنى 'la persévérance' ؟",opts:["L'impatience","L'abandon","La démotivation","La persévérance (المثابرة)"],c:3,e:"la persévérance = المثابرة — صفة أساسية لتعلم أي لغة"},
+     {q:"كيف تقول 'لقد تقدمت كثيراً' ؟",opts:["Je suis resté(e) au même niveau","Je suis moins bon(ne) qu'avant","Je n'ai pas progressé","J'ai beaucoup progressé"],c:3,e:"j'ai progressé = لقد تقدمت — passé composé de 'progresser'"},
+     {q:"كيف تقول 'أستطيع الآن قراءة مقال بالفرنسية' ؟",opts:["Je ne comprends pas les textes","Je lis uniquement des textes simples","Je suis incapable de lire en français","Je peux maintenant lire un article en français"],c:3,e:"je peux lire = أستطيع القراءة — مكتسب مهم بعد 30 ساعة من التعلم المكثف"},
+     {q:"كيف تقول 'أنا فخور/ة بتقدمي' ؟",opts:["Je suis déçu(e)","Je n'ai pas progressé","C'était trop facile","Je suis fier/fière de mes progrès"],c:3,e:"fier = فخور (مذكر) | fière = فخورة (مؤنث) | mes progrès = تقدمي"},
+     {q:"كيف تقول 'كل خطأ هو درس' ؟",opts:["Les erreurs sont à éviter","Je dois parler parfaitement","Les erreurs me découragent","Chaque erreur est une leçon"],c:3,e:"chaque erreur est une leçon = كل خطأ هو درس — الموقف الإيجابي الأساسي للتعلم"},
+     {q:"ما المستوى الذي وصلت إليه بعد 30 ساعة ؟",opts:["A0 مبتدئ تام","C1 متقدم","B2 فوق المتوسط","A2 إلى B1 (متوسط)"],c:3,e:"30 ساعة مكثفة تضعك بين A2-B1. استمر يومياً للوصول إلى B2!"},
+     {q:"ما الخطوة الأكثر فعالية بعد هذا البرنامج ؟",opts:["الراحة الطويلة ثم البدء من جديد","قراءة كتاب قواعد كامل","تجنب الأخطاء بعدم التحدث","ممارسة الفرنسية 15 دقيقة يومياً بانتظام"],c:3,e:"الاستمرارية أهم من الكثافة المتقطعة. 15 دقيقة يومياً = 91 ساعة في السنة!"}
+   ]},
+  {type:"read",label:"Révision Lecture",dur:60,
+   res:{name:"À la une: revue de presse internationale — RFI",url:"https://www.rfi.fr/fr/revue-de-presse/",icon:"📰"},
+   quiz:[
+     {q:"من أي مصادر كانت مقالات القراءة في هذا البرنامج ؟",opts:["The Conversation, RFI","Le Parisien, L'Équipe","France 24, TV5Monde","Les Echos, Le Monde, Le Figaro"],c:3,e:"Les Echos, Le Monde, Le Figaro — مصادر اقتصادية وسياسية راقية"},
+     {q:"ما معنى 'les faux amis' في تعلم اللغات ؟",opts:["الكلمات المرادفة","الكلمات المتضادة","الكلمات المتشابهة في النطق","كلمات تبدو مشابهة لكنها تختلف في المعنى"],c:3,e:"faux amis = false friends — كلمات تشبه لغتك لكن بمعنى مختلف — مثل 'librairie' ≠ library"},
+     {q:"كيف تقول 'مستواي تحسّن كثيراً' ؟",opts:["Mon niveau a baissé","Je suis moins bon(ne) qu'avant","Mon niveau n'a pas changé","Mon niveau s'est beaucoup amélioré"],c:3,e:"s'est amélioré = لقد تحسّن — passé composé du verbe pronominal 's'améliorer'"},
+     {q:"ما معنى 'le CECRL' ؟",opts:["Un diplôme de langue","Un test de prononciation","Une certification universitaire","Le Cadre Européen Commun de Référence pour les Langues"],c:3,e:"CECRL = A1→C2 — نظام أوروبي موحد لتقييم مستويات اللغات"},
+     {q:"كيف تقول 'أستطيع الآن التعبير عن أفكاري بالفرنسية' ؟",opts:["Je ne peux pas parler français","Je lis mais ne parle pas","Je comprends mais ne parle pas","Je peux maintenant m'exprimer en français"],c:3,e:"m'exprimer = التعبير عن نفسي — الهدف الرئيسي من تعلم اللغة"},
+     {q:"ما معنى 'l'expression écrite' ؟",opts:["La compréhension orale","L'expression orale","La compréhension écrite","L'expression écrite (التعبير الكتابي)"],c:3,e:"expression écrite = التعبير الكتابي — إحدى الكفايات الأربع في CECRL"},
+     {q:"كيف تقول 'استقلاليتي اللغوية تزداد' ؟",opts:["Je dépends encore d'un traducteur","Je ne progresse plus","J'ai besoin d'aide constante","Mon autonomie linguistique se développe"],c:3,e:"autonomie linguistique = الاستقلالية اللغوية — القدرة على التواصل بشكل مستقل"},
+     {q:"ما معنى 'réviser ses acquis' ؟",opts:["Ignorer ce qu'on a appris","Recommencer depuis zéro","Apprendre de nouvelles choses uniquement","Réviser ses acquis (مراجعة المكتسبات)"],c:3,e:"réviser ses acquis = مراجعة ما تعلمته — ضروري لتثبيت المعلومات في الذاكرة"},
+     {q:"كيف تقول 'التحسن يتطلب وقتاً وصبراً' ؟",opts:["On peut tout apprendre en un jour","L'effort n'est pas nécessaire","Les résultats sont immédiats","La progression demande du temps et de la patience"],c:3,e:"demander du temps et de la patience = يتطلب وقتاً وصبراً — حكمة في تعلم اللغات"},
+     {q:"كيف تقول 'أُطبّق ما تعلمته' ؟",opts:["J'oublie ce que j'ai appris","Je ne pratique jamais","Je révise uniquement la théorie","Je mets en pratique ce que j'ai appris"],c:3,e:"mettre en pratique = يُطبّق | ce que j'ai appris = ما تعلمته"},
+     {q:"كيف تقول 'مراجعة منتظمة ضرورية' ؟",opts:["Il n'est pas utile de réviser","On peut apprendre une fois et oublier","La révision est une perte de temps","La révision régulière est indispensable"],c:3,e:"régulière = منتظمة | indispensable = ضرورية / لا غنى عنها"},
+     {q:"ما معنى 'le niveau B2' ؟",opts:["Débutant complet","Faux débutant","Intermédiaire inférieur","Intermédiaire supérieur (autonome)"],c:3,e:"B2 = niveau autonome — يمكن العمل والدراسة بالفرنسية — الهدف بعد B1"}
+   ]},
+  {type:"speak",label:"Examen final",dur:60,
+   topic:"🏆 Présentation finale 5 min : qui êtes-vous professionnellement ? Quels sont vos objectifs en français ?",
+   ref:"C'est l'examen final — enregistrez-vous et écoutez votre enregistrement",
+   res:{name:"We Try The Most Popular French Snacks! | Super Easy French 156",url:"https://www.youtube.com/watch?v=xTy21_vWZjY",icon:"▶️"},
+   quiz:[
+     {q:"كم إجمالي ساعات التعلم في هذا البرنامج ؟",opts:["10 ساعات","20 ساعة","15 ساعة","30 ساعة كاملة"],c:3,e:"3 ساعات × 10 أيام = 30 ساعة! إنجاز استثنائي 🎉"},
+     {q:"كيف تقول 'أنا فخور/ة بتقدمي' ؟",opts:["Je suis déçu(e)","Je n'ai pas progressé","C'était trop facile","Je suis fier(fière) de mes progrès"],c:3,e:"fier = فخور (مذكر) | fière = فخورة (مؤنث) | mes progrès = تقدمي"},
+     {q:"كيف تقول 'أنا مستعد/ة للتحدث بالفرنسية' ؟",opts:["Je refuse de parler français","J'ai besoin de plus de temps","Je préfère l'anglais","Je suis prêt(e) à parler en français"],c:3,e:"être prêt(e) à = مستعد/ة لـ — علامة الثقة والاستعداد"},
+     {q:"كيف تقول 'الممارسة تصنع الإتقان' ؟",opts:["La théorie est suffisante","Il faut tout mémoriser","L'intuition suffit","La pratique rend parfait"],c:3,e:"la pratique rend parfait = الممارسة تصنع الإتقان — مثل شائع عالمياً"},
+     {q:"كيف تقول 'ما زلت أتعلم وأتحسن' ؟",opts:["J'ai tout oublié","Je suis parfait(e)","Je ne progresse plus","Je continue à apprendre et à progresser"],c:3,e:"continuer à = الاستمرار في | apprendre et progresser = التعلم والتقدم"},
+     {q:"كيف تقول 'الفرنسية لغة جميلة ومعقدة' ؟",opts:["Le français est une langue simple","Le français n'est pas intéressant","Le français est identique à l'espagnol","Le français est une belle langue, mais complexe"],c:3,e:"belle mais complexe = جميلة لكن معقدة — موقف متوازن وصادق من المتعلمين"},
+     {q:"كيف تقول 'أريد الوصول إلى مستوى B2' ؟",opts:["Je me contente du niveau A1","Je vise le niveau C2","Je n'ai pas d'objectif de niveau","Je veux atteindre le niveau B2"],c:3,e:"atteindre = يصل إلى / يبلغ | B2 = المستوى الذي يُمكّن من العمل بالفرنسية"},
+     {q:"كيف تقول 'سأستمر في الممارسة يومياً' ؟",opts:["Je vais arrêter de pratiquer","Je vais oublier le français","Je vais étudier seulement le week-end","Je vais continuer à pratiquer chaque jour"],c:3,e:"continuer à pratiquer chaque jour = الاستمرار في الممارسة يومياً — المفتاح الحقيقي للتقدم"},
+     {q:"ما معنى 'maintenir son niveau' ؟",opts:["Améliorer son niveau","Perdre son niveau","Maintenir son niveau (الحفاظ على مستواه)","Évaluer son niveau"],c:2,e:"maintenir = يُحافظ على — 'بدون ممارسة تنسى' — استمر بعد البرنامج"},
+     {q:"كيف تقول 'هذا البرنامج غيّر طريقة تعلمي' ؟",opts:["Ce programme était inutile","Je n'ai rien appris","Je recommence depuis le début","Ce programme a changé ma façon d'apprendre"],c:3,e:"a changé = غيّر | ma façon d'apprendre = طريقة تعلمي — passé composé"},
+     {q:"كيف تقول 'أشكر على هذه التجربة اللغوية' ؟",opts:["Je n'ai pas aimé ce programme","Ce programme était inutile","Je veux recommencer depuis le début","Je suis reconnaissant(e) pour cette expérience linguistique"],c:3,e:"reconnaissant(e) = ممتنّ/ة | cette expérience linguistique = هذه التجربة اللغوية"},
+     {q:"كيف تقول 'الرحلة اللغوية مستمرة' ؟",opts:["La langue est un obstacle","J'ai terminé, c'est suffisant","Le voyage linguistique est fini","Le voyage linguistique continue"],c:3,e:"le voyage linguistique continue = الرحلة اللغوية مستمرة — نهاية البرنامج بداية الرحلة الحقيقية!"}
+   ]}
+]}
+];
+
+// ═══════════════════════════════════════════
+// ÉTAT
+// ═══════════════════════════════════════════
+var S={cur:1,donePhases:{},doneDays:[],timers:{},tivs:{},quiz:{},open:{}};
+
+// ═══════════════════════════════════════════
+// PERSISTANCE LOCALE (localStorage)
+// ═══════════════════════════════════════════
+function saveState(){
+  try{
+    var toSave={cur:S.cur,donePhases:S.donePhases,doneDays:S.doneDays,timers:S.timers,quiz:S.quiz,open:S.open};
+    localStorage.setItem('fr10_state',JSON.stringify(toSave));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    var raw=localStorage.getItem('fr10_state');
+    if(!raw)return;
+    var saved=JSON.parse(raw);
+    if(saved.cur)S.cur=saved.cur;
+    if(saved.donePhases)S.donePhases=saved.donePhases;
+    if(saved.doneDays)S.doneDays=saved.doneDays;
+    if(saved.timers)S.timers=saved.timers;
+    if(saved.quiz)S.quiz=saved.quiz;
+    if(saved.open)S.open=saved.open;
+  }catch(e){}
+}
+loadState();
+var PASS_SCORE=8; // 8/12 pour valider
+
+function pk(d,p){return d+"-"+p}
+function isDayDone(d){return S.doneDays.indexOf(d)>=0}
+function isDayUnlocked(d){return d===1||isDayDone(d-1)}
+function isPhaseDone(d,p){return !!S.donePhases[pk(d,p)]}
+
+function updateOverall(){
+  var total=30,done=0;
+  DAYS.forEach(function(day){
+    day.phases.forEach(function(_,pi){if(isPhaseDone(day.day,pi))done++;});
+  });
+  var pct=Math.round(done/total*100);
+  document.getElementById("ovPct").textContent=pct+"%";
+  document.getElementById("progPct").textContent=pct+"%";
+  document.getElementById("progFill").style.width=pct+"%";
+  var c=131.9;
+  document.getElementById("ovArc").setAttribute("stroke-dashoffset",c-c*pct/100);
+  document.getElementById("statDays").textContent=S.doneDays.length+"/10";
+  document.getElementById("statHours").textContent=(S.doneDays.length*3)+"h";
+}
+
+function renderTabs(){
+  var el=document.getElementById("tabsEl");
+  el.innerHTML="";
+  DAYS.forEach(function(day){
+    var unlocked=isDayUnlocked(day.day);
+    var done=isDayDone(day.day);
+    var active=day.day===S.cur;
+    var cls="tab"+(active?" tactive":done?" tdone":!unlocked?" tlocked":"");
+    var dots=day.phases.map(function(ph,pi){
+      var on=isPhaseDone(day.day,pi);
+      return '<div class="tdot '+ph.type+(on?" on":"")+'"></div>';
+    }).join("");
+    var btn=document.createElement("div");
+    btn.className=cls;
+    btn.innerHTML='<span class="tab-num">'+day.day+'</span><span class="tab-lbl">Jour '+day.day+'</span><div class="tab-dots">'+dots+'</div>';
+    if(unlocked||done){
+      (function(d){btn.onclick=function(){S.cur=d;renderAll();};})(day.day);
+    }
+    el.appendChild(btn);
+  });
+}
+
+function renderAll(){renderTabs();renderDay();updateOverall();}
+
+function renderDay(){
+  var el=document.getElementById("mainEl");
+  var d=S.cur;
+  var day=DAYS[d-1];
+  if(!isDayUnlocked(d)){
+    el.innerHTML='<div class="locked-day"><div class="lock-ico">🔒</div><p>Complétez le Jour '+(d-1)+' pour débloquer ce jour</p></div>';
+    return;
+  }
+  var allDone=day.phases.every(function(_,pi){return isPhaseDone(d,pi);});
+  var bannerHtml='<div class="day-banner'+(allDone?" show":"")+'"><h3>🎉 Jour '+d+' terminé !</h3><p>'+(d<10?'Le Jour '+(d+1)+' est maintenant disponible. Bravo !':'🏆 Félicitations ! Programme complet — 30 heures de français !')+'</p></div>';
+  var heroHtml='<div class="hero"><div class="hero-l"><div class="hero-num">'+d+'</div><div><div class="hero-title">'+day.title+'</div><div class="hero-topic">'+day.topic+'</div></div></div><div class="hero-badge">⏱ (30+30)×3 = 180 min</div></div>';
+  var phasesHtml='<div class="phases">';
+  day.phases.forEach(function(ph,pi){phasesHtml+=buildPhase(d,pi,ph);});
+  phasesHtml+='</div>';
+  el.innerHTML=bannerHtml+heroHtml+phasesHtml;
+  day.phases.forEach(function(ph,pi){
+    var k=pk(d,pi);
+    if(!S.timers[k])S.timers[k]={rem:HALF_SEC,running:false,done:false,half:1,h1done:false};
+    updateTimerUI(d,pi);
+    renderQuiz(d,pi);
+    updateCompleteBtn(d,pi);
+  });
+}
+
+function buildPhase(d,pi,ph){
+  var k=pk(d,pi);
+  var done=isPhaseDone(d,pi);
+  var isOpen=!!S.open[k];
+  var iconMap={listen:"🎧",read:"📖",speak:"🗣️"};
+  var durLabel={listen:"30 + 30 min",read:"30 + 30 min",speak:"30 + 30 min"};
+  var badge=done
+    ?'<span class="pbadge pb-done">✓ Terminé</span>'
+    :(isOpen?'<span class="pbadge pb-open">Ouvert</span>':'<span class="pbadge pb-lock">Cliquer pour ouvrir</span>');
+
+  var speakHtml="";
+  if(ph.type==="speak"&&ph.topic){
+    speakHtml='<div class="speak-box"><div class="speak-lbl">Sujet de conversation</div><div class="speak-text">'+ph.topic+'</div>'+(ph.ref?'<div class="speak-ref">📌 '+ph.ref+'</div>':'')+'</div>';
+  }
+
+  var HALF=30*60;
+  var ts=S.timers[k]||{rem:HALF,running:false,done:false,half:1,h1done:false};
+  var r=46,circ=2*Math.PI*r;
+  var arcColor=ph.type==="listen"?"#2563eb":ph.type==="read"?"#059669":"#d97706";
+  var offset=circ*(ts.rem/HALF);
+  var numCls=ts.done?"done":ts.running?"run":"";
+  var startBtnLabel=ts.done?"✓ Terminé":(ts.running?"⏸ Pause":"▶ Démarrer");
+  var lockWarning=!done&&!ts.done
+    ?'<div class="timer-lock-msg">⚠️ Terminez les deux parties (30+30 min) pour valider</div>'
+    :'';
+
+  var h1cls=ts.h1done?"half-done":(ts.half===1&&ts.running?"half-run":"half-wait");
+  var h2cls=ts.done?"half-done":(ts.half===2&&ts.running?"half-run":"half-wait");
+
+  var timerHtml='<div class="timer-section">'
+    +'<div class="timer-lbl-top">⏱ Minuterie — 30 + 30 minutes</div>'
+    +'<div class="half-indicators" id="hind-'+k+'">'
+    +'<div class="half-item '+h1cls+'"><span class="half-num">1</span><span class="half-lbl">30 min</span>'+(ts.h1done?'<span class="half-check">✓</span>':'')+'</div>'
+    +'<div class="half-sep">→</div>'
+    +'<div class="half-item '+h2cls+'"><span class="half-num">2</span><span class="half-lbl">30 min</span>'+(ts.done?'<span class="half-check">✓</span>':'')+'</div>'
+    +'</div>'
+    +'<div class="timer-ring-wrap">'
+    +'<svg width="110" height="110" viewBox="0 0 110 110">'
+    +'<circle cx="55" cy="55" r="'+r+'" fill="none" stroke="#e2e8f0" stroke-width="6"/>'
+    +'<circle id="tarc-'+k+'" cx="55" cy="55" r="'+r+'" fill="none" stroke="'+arcColor+'" stroke-width="6"'
+    +' stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+offset+'"'
+    +' transform="rotate(-90 55 55)" style="transition:stroke-dashoffset 0.8s linear"/>'
+    +'</svg>'
+    +'<div class="timer-center">'
+    +'<div class="timer-num '+numCls+'" id="tnum-'+k+'">'+fmt(ts.rem)+'</div>'
+    +'<div class="timer-sub" id="tlbl-'+k+'">'+(ts.done?"✅ Les deux parties terminées !":(ts.h1done?"2ème partie":"1ère partie"))+'</div>'
+    +'</div></div>'
+    +'<div class="timer-btns">'
+    +'<button class="btn blue" id="tstart-'+k+'" onclick="toggleTimer('+d+','+pi+')"'+(ts.done?" disabled":"")+'>'+startBtnLabel+'</button>'
+    +'<button class="btn" onclick="resetTimer('+d+','+pi+')">↺ Réinitialiser</button>'
+    +'</div>'
+    +lockWarning
+    +'</div>';
+
+  var completeHtml=done?'<div class="done-stamp">✅ Cette étape est terminée !</div>':'';
+
+  var bodyHtml='<div class="pbody'+(isOpen?" open":"")+'" id="pbody-'+k+'">'
+    +'<div class="res-lbl">'+(ph.type==="listen"?"📺 Lien vidéo":ph.type==="read"?"📰 Lien article":"🎬 Référence conversation")+'</div>'
+    +'<a href="'+ph.res.url+'" target="_blank" class="res-link">'
+    +'<span class="res-icon">'+ph.res.icon+'</span>'
+    +'<div><div class="res-name">'+ph.res.name+'</div><div class="res-url">'+ph.res.url+'</div></div>'
+    +'<span class="res-arrow">↗</span>'
+    +'</a>'
+    +speakHtml
+    +'<div class="sep"></div>'
+    +timerHtml
+    +'<div id="quiz-'+k+'"></div>'
+    +completeHtml
+    +'</div>';
+
+  return '<div class="pcard'+(done?" pdone":"")+'" id="pcard-'+k+'">'
+    +'<div class="ptop" onclick="togglePhase('+d+','+pi+')">'
+    +'<div class="picon '+ph.type+'">'+iconMap[ph.type]+'</div>'
+    +'<div class="pmeta"><div class="pname">'+ph.label+'</div><div class="pdur">'+durLabel[ph.type]+'</div></div>'
+    +badge
+    +'</div>'
+    +bodyHtml
+    +'</div>';
+}
+
+window.togglePhase=function(d,pi){
+  var k=pk(d,pi);
+  S.open[k]=!S.open[k];
+  var b=document.getElementById("pbody-"+k);
+  if(b)b.classList.toggle("open",S.open[k]);
+};
+
+var HALF_SEC=30*60;
+
+function fmt(s){
+  var m=Math.floor(s/60),sec=s%60;
+  return(m<10?"0":"")+m+":"+(sec<10?"0":"")+sec;
+}
+
+function getTimer(k){
+  if(!S.timers[k])S.timers[k]={rem:HALF_SEC,running:false,done:false,half:1,h1done:false};
+  return S.timers[k];
+}
+
+function playAlarmSound(){
+  try{
+    var ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [[880,0,0.15],[880,0.2,0.15],[1100,0.4,0.3]].forEach(function(b){
+      var o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=b[0];g.gain.value=0.35;
+      o.start(ctx.currentTime+b[1]);o.stop(ctx.currentTime+b[1]+b[2]);
+    });
+  }catch(e){}
+}
+
+function showAlarmPopup(k,d,pi,isLast){
+  playAlarmSound();
+  if(window.Notification&&Notification.permission==="granted"){
+    new Notification(isLast?"✅ Session terminée !":"⏰ 1ère partie terminée !",{
+      body:isLast?"Vous avez terminé 30+30 minutes 🎉":"Faites une pause puis commencez la 2ème partie"
+    });
+  }
+  ['_alarmOverlay','_alarmPopup'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.remove();
+  });
+  var overlay=document.createElement("div");
+  overlay.className="alarm-overlay";overlay.id="_alarmOverlay";
+  var popup=document.createElement("div");
+  popup.className="alarm-popup";popup.id="_alarmPopup";
+  if(isLast){
+    popup.innerHTML='<div class="alarm-ico">🎉</div>'
+      +'<h3>Bravo ! Session terminée</h3>'
+      +'<p>Vous avez complété les deux parties<br>30 + 30 minutes ✅</p>'
+      +'<button class="btn green" onclick="closeAlarm()">Super ! 👍</button>';
+  }else{
+    popup.innerHTML='<div class="alarm-ico">⏰</div>'
+      +'<h3>1ère partie terminée !</h3>'
+      +'<p>Bravo ! 30 minutes complétées 🙌<br>Faites une pause puis commencez la 2ème partie</p>'
+      +'<button class="btn blue" onclick="startSecondHalf(\''+k+'\','+d+','+pi+')">▶ Commencer la 2ème partie</button>'
+      +'<br><button class="btn" onclick="closeAlarm()" style="margin-top:8px;width:100%">⏸ Plus tard</button>';
+  }
+  document.body.appendChild(overlay);
+  document.body.appendChild(popup);
+}
+
+window.closeAlarm=function(){
+  ['_alarmOverlay','_alarmPopup'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.remove();
+  });
+};
+
+window.startSecondHalf=function(k,d,pi){
+  closeAlarm();
+  var ts=getTimer(k);
+  if(ts.done||ts.running||!ts.h1done)return;
+  ts.running=true;ts.startedAt=Date.now();ts.initialRem=ts.rem;
+  S.tivs[k]=setInterval(function(){
+    var elapsed=Math.floor((Date.now()-ts.startedAt)/1000);
+    ts.rem=Math.max(0,ts.initialRem-elapsed);
+    updateTimerUI(d,pi);saveState();
+    if(ts.rem<=0){
+      clearInterval(S.tivs[k]);delete S.tivs[k];
+      ts.running=false;ts.done=true;ts.startedAt=null;
+      saveState();updateTimerUI(d,pi);updateCompleteBtn(d,pi);
+      var lw=document.querySelector("#pbody-"+k+" .timer-lock-msg");
+      if(lw)lw.remove();
+      showAlarmPopup(k,d,pi,true);
+    }
+  },500);
+  updateTimerUI(d,pi);
+};
+
+window.toggleTimer=function(d,pi){
+  var k=pk(d,pi);
+  var ts=getTimer(k);
+  if(ts.done)return;
+  if(S.tivs[k]){
+    // PAUSE: save remaining time based on real elapsed
+    clearInterval(S.tivs[k]);delete S.tivs[k];
+    if(ts.startedAt){ts.rem=Math.max(0,ts.initialRem-Math.floor((Date.now()-ts.startedAt)/1000));}
+    ts.running=false;ts.startedAt=null;ts.initialRem=ts.rem;
+    saveState();updateTimerUI(d,pi);return;
+  }
+  if(ts.h1done&&ts.half===2&&!ts.running){startSecondHalf(k,d,pi);return;}
+  if(window.Notification&&Notification.permission==="default"){Notification.requestPermission();}
+  ts.running=true;ts.startedAt=Date.now();ts.initialRem=ts.rem;
+  S.tivs[k]=setInterval(function(){
+    var elapsed=Math.floor((Date.now()-ts.startedAt)/1000);
+    ts.rem=Math.max(0,ts.initialRem-elapsed);
+    updateTimerUI(d,pi);saveState();
+    if(ts.rem<=0){
+      clearInterval(S.tivs[k]);delete S.tivs[k];
+      ts.running=false;ts.startedAt=null;ts.h1done=true;ts.half=2;ts.rem=HALF_SEC;ts.initialRem=HALF_SEC;
+      saveState();updateTimerUI(d,pi);showAlarmPopup(k,d,pi,false);
+    }
+  },500);
+  updateTimerUI(d,pi);
+};
+
+window.resetTimer=function(d,pi){
+  var k=pk(d,pi);
+  if(S.tivs[k]){clearInterval(S.tivs[k]);delete S.tivs[k];}
+  S.timers[k]={rem:HALF_SEC,running:false,done:false,half:1,h1done:false,startedAt:null,initialRem:HALF_SEC};
+  saveState();updateTimerUI(d,pi);updateCompleteBtn(d,pi);
+};
+
+function timerDone(d,pi){var ts=S.timers[pk(d,pi)];return !!(ts&&ts.done);}
+
+function updateTimerUI(d,pi){
+  var k=pk(d,pi);
+  var ts=getTimer(k);
+  var r=46,circ=2*Math.PI*r;
+  var numEl=document.getElementById("tnum-"+k);
+  var arcEl=document.getElementById("tarc-"+k);
+  var startEl=document.getElementById("tstart-"+k);
+  var lblEl=document.getElementById("tlbl-"+k);
+  var hindEl=document.getElementById("hind-"+k);
+  if(numEl){
+    numEl.textContent=fmt(ts.rem);
+    numEl.className="timer-num"+(ts.done?" done":ts.running?" run":"");
+  }
+  if(arcEl)arcEl.setAttribute("stroke-dashoffset",circ*(ts.rem/HALF_SEC));
+  if(startEl){
+    if(ts.done){startEl.textContent="✓ Terminé";startEl.disabled=true;}
+    else if(ts.h1done&&!ts.running)startEl.textContent="▶ 2ème partie";
+    else startEl.textContent=ts.running?"⏸ Pause":"▶ Démarrer";
+    startEl.disabled=false;
+    if(ts.done)startEl.disabled=true;
+  }
+  if(lblEl){
+    if(ts.done)lblEl.textContent="✅ Les deux parties terminées !";
+    else if(ts.h1done)lblEl.textContent="2ème partie — 30 min";
+    else lblEl.textContent="1ère partie — 30 min";
+  }
+  if(hindEl){
+    var h1cls=ts.h1done?"half-done":(ts.half===1&&ts.running?"half-run":"half-wait");
+    var h2cls=ts.done?"half-done":(ts.half===2&&ts.running?"half-run":ts.h1done?"half-wait":"half-wait");
+    hindEl.innerHTML=
+      '<div class="half-item '+h1cls+'"><span class="half-num">1</span><span class="half-lbl">30 min</span>'+(ts.h1done?'<span class="half-check">✓</span>':'')+'</div>'
+      +'<div class="half-sep">→</div>'
+      +'<div class="half-item '+h2cls+'"><span class="half-num">2</span><span class="half-lbl">30 min</span>'+(ts.done?'<span class="half-check">✓</span>':'')+'</div>';
+  }
+}
+
+// ═══════════════════════════════════════════
+// QUIZ — 12 questions, besoin de 8/12
+// ═══════════════════════════════════════════
+function quizPassed(d,pi){
+  var k=pk(d,pi);var qs=S.quiz[k];
+  return qs&&qs.finished&&qs.score>=PASS_SCORE;
+}
+
+function renderQuiz(d,pi){
+  var k=pk(d,pi);
+  var ph=DAYS[d-1].phases[pi];
+  var el=document.getElementById("quiz-"+k);
+  if(!el)return;
+  if(!S.quiz[k])S.quiz[k]={cur:0,score:0,answered:[],finished:false};
+  var qs=S.quiz[k];
+  var quiz=ph.quiz;
+
+  if(qs.finished){
+    var passed=qs.score>=PASS_SCORE;
+    el.innerHTML='<div class="quiz-box"><div class="quiz-result">'
+      +'<div class="big '+(passed?"ok":"bad")+'">'+qs.score+'/'+quiz.length+'</div>'
+      +'<div class="msg">'+(passed?"🌟 Excellent ! Quiz réussi ("+qs.score+"/"+quiz.length+")":"⚠️ Il faut "+PASS_SCORE+"/"+quiz.length+" pour réussir — score : "+qs.score)+'</div>'
+      +(passed
+        ?'<div style="background:var(--green2);color:var(--green);padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:700;margin-bottom:10px">✅ Bouton de validation déverrouillé — validez l\'étape !</div>'
+        :'<div style="background:var(--red2);color:var(--red);padding:8px 14px;border-radius:8px;font-size:.82rem;font-weight:700;margin-bottom:10px">❌ Quiz non réussi — réessayez</div>')
+      +'<button class="btn" onclick="resetQuiz('+d+','+pi+')">🔄 Recommencer le quiz</button>'
+      +'</div></div>';
+    updateCompleteBtn(d,pi);
+    return;
+  }
+
+  if(qs.cur>=quiz.length){qs.finished=true;renderQuiz(d,pi);return;}
+
+  var q=quiz[qs.cur];
+  var ans=qs.answered[qs.cur];
+  var fbShow=ans!==undefined?" show":"";
+  var fbCls=ans!==undefined?(ans===q.c?" ok":" no"):"";
+  var fbText=ans!==undefined?(ans===q.c?"✅ Correct ! "+q.e:"❌ Réponse : "+q.opts[q.c]+" — "+q.e):"";
+
+  var questionArea="";
+  if(ph.type==="listen"){
+    var sentence=q.sentence||q.q;
+    questionArea='<div class="audio-q-wrap">'
+      +'<div style="font-size:.8rem;color:var(--blue);font-weight:700;margin-bottom:8px">🎧 Écoutez la phrase puis choisissez sa signification</div>'
+      +'<button class="audio-play-btn" id="audiobtn-'+k+'-'+qs.cur+'" onclick="playAudio(\''+sentence.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\',' +'\'audiobtn-'+k+'-'+qs.cur+'\')">'
+      +'🔊 Écouter</button>'
+      +'<div class="audio-hint">Appuyez pour écouter, puis choisissez la bonne réponse</div>'
+      +'</div>'
+      +'<div class="quiz-q">'+q.q+'</div>';
+  }else if(ph.type==="speak"){
+    var sentence2=q.sentence||q.q;
+    questionArea='<div class="speech-q-wrap">'
+      +'<div class="speak-lbl">🗣️ Écoutez la question et essayez de répondre à l\'oral</div>'
+      +'<button class="audio-play-btn" id="spkbtn-'+k+'-'+qs.cur+'" onclick="playAudio(\''+sentence2.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\',' +'\'spkbtn-'+k+'-'+qs.cur+'\')">'
+      +'🔊 Écouter la question</button>'
+      +'<div style="margin-top:10px">'
+      +'<button class="speech-record-btn" id="recbtn-'+k+'-'+qs.cur+'" onclick="toggleRecord(\''+k+'\','+qs.cur+')">'
+      +'🎤 Enregistrer votre réponse</button>'
+      +'<div class="speech-transcript" id="transcript-'+k+'-'+qs.cur+'">—</div>'
+      +'</div>'
+      +'<div class="speech-hint">Après l\'enregistrement, choisissez la bonne réponse ci-dessous</div>'
+      +'</div>'
+      +'<div class="quiz-q">'+q.q+'</div>';
+  }else{
+    questionArea='<div class="quiz-q">'+(qs.cur+1)+'. '+q.q+'</div>';
+  }
+
+  var optsHtml=q.opts.map(function(opt,oi){
+    var cls="qopt"+(ans!==undefined?" dis":"");
+    if(ans!==undefined){if(oi===q.c)cls+=" ok";else if(oi===ans)cls+=" no";}
+    return'<button class="'+cls+'" onclick="answerQ('+d+','+pi+','+oi+')">'+opt+'</button>';
+  }).join("");
+
+  el.innerHTML='<div class="quiz-box">'
+    +'<div class="quiz-hdr">📝 Quiz — '
+    +'<span class="q-score">'+qs.score+'/'+quiz.length+'</span>'
+    +'<span class="q-needed">Requis : '+PASS_SCORE+'/'+quiz.length+'</span>'
+    +'</div>'
+    +questionArea
+    +'<div class="quiz-opts">'+optsHtml+'</div>'
+    +'<div class="q-fb'+fbCls+fbShow+'">'+fbText+'</div>'
+    +'<div class="quiz-nav"><span class="quiz-prog">Question '+(qs.cur+1)+' / '+quiz.length+'</span>'
+    +(ans!==undefined?'<button class="btn blue" onclick="nextQ('+d+','+pi+')">Suivant →</button>':'')
+    +'</div></div>';
+}
+
+window.playAudio=function(text,btnId){
+  if(!window.speechSynthesis)return alert("Votre navigateur ne supporte pas la synthèse vocale");
+  window.speechSynthesis.cancel();
+  var btn=document.getElementById(btnId);
+  if(btn){btn.textContent="⏳ Lecture...";btn.classList.add("playing");}
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang="fr-FR";u.rate=0.85;u.pitch=1;
+  var voices=window.speechSynthesis.getVoices();
+  var frVoice=voices.find(function(v){return v.lang.startsWith("fr");});
+  if(frVoice)u.voice=frVoice;
+  u.onend=function(){if(btn){btn.textContent="🔊 Réécouter";btn.classList.remove("playing");}};
+  u.onerror=function(){if(btn){btn.textContent="🔊 Écouter";btn.classList.remove("playing");}};
+  window.speechSynthesis.speak(u);
+};
+
+if(window.speechSynthesis){
+  window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.getVoices();};
+}
+
+var _recState={rec:null,active:null};
+window.toggleRecord=function(k,qi){
+  var btnId="recbtn-"+k+"-"+qi;
+  var transId="transcript-"+k+"-"+qi;
+  var btn=document.getElementById(btnId);
+  var trans=document.getElementById(transId);
+  if(!window.SpeechRecognition&&!window.webkitSpeechRecognition){
+    if(trans)trans.textContent="⚠️ Votre navigateur ne supporte pas l'enregistrement — choisissez directement";
+    return;
+  }
+  if(_recState.rec&&_recState.active===k+"-"+qi){_recState.rec.stop();return;}
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  var rec=new SR();
+  rec.lang="fr-FR";rec.interimResults=true;rec.maxAlternatives=1;
+  _recState.rec=rec;_recState.active=k+"-"+qi;
+  if(btn){btn.textContent="⏹ Arrêter l'enregistrement";btn.classList.add("recording");}
+  rec.onresult=function(e){
+    var t=Array.from(e.results).map(function(r){return r[0].transcript;}).join(" ");
+    if(trans)trans.textContent="🎤 Entendu : "+t;
+  };
+  rec.onend=function(){
+    _recState.rec=null;_recState.active=null;
+    if(btn){btn.textContent="🎤 Réenregistrer";btn.classList.remove("recording");}
+  };
+  rec.onerror=function(){
+    if(trans)trans.textContent="⚠️ Rien entendu — choisissez la réponse dans la liste";
+    if(btn){btn.textContent="🎤 Réenregistrer";btn.classList.remove("recording");}
+  };
+  rec.start();
+};
+
+window.answerQ=function(d,pi,oi){
+  var k=pk(d,pi);var qs=S.quiz[k];
+  if(qs.answered[qs.cur]!==undefined)return;
+  qs.answered[qs.cur]=oi;
+  if(oi===DAYS[d-1].phases[pi].quiz[qs.cur].c)qs.score++;
+  saveState();renderQuiz(d,pi);
+};
+window.nextQ=function(d,pi){
+  var k=pk(d,pi);S.quiz[k].cur++;saveState();renderQuiz(d,pi);
+};
+window.resetQuiz=function(d,pi){
+  S.quiz[pk(d,pi)]={cur:0,score:0,answered:[],finished:false};
+  saveState();renderQuiz(d,pi);updateCompleteBtn(d,pi);
+};
+
+function updateCompleteBtn(d,pi){
+  var k=pk(d,pi);
+  var tDone=timerDone(d,pi);
+  var qPass=quizPassed(d,pi);
+  var phaseDone=isPhaseDone(d,pi);
+  var pbody=document.getElementById("pbody-"+k);
+  if(!pbody)return;
+  var existing=pbody.querySelector(".complete-btn-wrap,.done-stamp,.score-req-msg");
+  if(existing)existing.remove();
+  if(phaseDone){
+    var stamp=document.createElement("div");
+    stamp.className="done-stamp";
+    stamp.textContent="✅ Cette étape est terminée !";
+    pbody.appendChild(stamp);
+  }else if(tDone&&qPass){
+    var wrap=document.createElement("div");
+    wrap.className="complete-btn-wrap";
+    wrap.innerHTML='<button class="complete-btn" onclick="completePhase('+d+','+pi+')">✓ Valider cette étape</button>';
+    pbody.appendChild(wrap);
+  }else if(tDone&&!qPass){
+    var msg=document.createElement("div");
+    msg.className="score-req-msg";
+    var qs=S.quiz[k];var sc=qs?qs.score:0;
+    msg.textContent="⚠️ Minuterie terminée ✓ — Il faut "+PASS_SCORE+"/12 bonnes réponses (score : "+sc+"/12). Complétez le quiz d'abord !";
+    pbody.appendChild(msg);
+  }
+}
+
+window.completePhase=function(d,pi){
+  if(!timerDone(d,pi)){alert("Vous devez d'abord terminer la minuterie !");return;}
+  if(!quizPassed(d,pi)){alert("Vous devez réussir le quiz avec "+PASS_SCORE+"/12 bonnes réponses !");return;}
+  S.donePhases[pk(d,pi)]=true;
+  var day=DAYS[d-1];
+  if(day.phases.every(function(_,i){return isPhaseDone(d,i);})&&!isDayDone(d)){
+    S.doneDays.push(d);
+  }
+  saveState();renderAll();
+};
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+
+// ═══════════════════════════════════════════
+// VISIBILITÉ DE PAGE — le timer continue même si on change d'onglet
+// ═══════════════════════════════════════════
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){
+    // Page cachée : sauvegarder l'état avec timestamp
+    Object.keys(S.tivs).forEach(function(k){
+      var ts=S.timers[k];
+      if(ts&&ts.running&&ts.startedAt){
+        ts.rem=Math.max(0,ts.initialRem-Math.floor((Date.now()-ts.startedAt)/1000));
+        saveState();
+      }
+    });
+  }else{
+    // Page visible : resynchroniser et redémarrer les intervalles
+    Object.keys(S.timers).forEach(function(k){
+      var ts=S.timers[k];
+      if(ts&&ts.running&&!ts.done){
+        var parts=k.split('-');
+        var d=parseInt(parts[0]);var pi=parseInt(parts[1]);
+        // Calculer le temps réel écoulé depuis la dernière sauvegarde
+        if(ts.startedAt){
+          ts.rem=Math.max(0,ts.initialRem-Math.floor((Date.now()-ts.startedAt)/1000));
+        }
+        // Si le timer a expiré pendant l'absence
+        if(ts.rem<=0){
+          if(S.tivs[k]){clearInterval(S.tivs[k]);delete S.tivs[k];}
+          if(!ts.h1done){
+            ts.running=false;ts.h1done=true;ts.half=2;ts.rem=HALF_SEC;ts.initialRem=HALF_SEC;ts.startedAt=null;
+            saveState();updateTimerUI(d,pi);showAlarmPopup(k,d,pi,false);
+          }else{
+            ts.running=false;ts.done=true;ts.startedAt=null;
+            saveState();updateTimerUI(d,pi);updateCompleteBtn(d,pi);
+            showAlarmPopup(k,d,pi,true);
+          }
+          return;
+        }
+        // Reprendre l'intervalle avec un nouveau timestamp
+        if(S.tivs[k]){clearInterval(S.tivs[k]);delete S.tivs[k];}
+        ts.startedAt=Date.now();ts.initialRem=ts.rem;
+        (function(key,dd,pii,timer){
+          S.tivs[key]=setInterval(function(){
+            var el=Math.floor((Date.now()-timer.startedAt)/1000);
+            timer.rem=Math.max(0,timer.initialRem-el);
+            updateTimerUI(dd,pii);saveState();
+            if(timer.rem<=0){
+              clearInterval(S.tivs[key]);delete S.tivs[key];
+              timer.running=false;timer.startedAt=null;
+              if(!timer.h1done){
+                timer.h1done=true;timer.half=2;timer.rem=HALF_SEC;timer.initialRem=HALF_SEC;
+                saveState();updateTimerUI(dd,pii);showAlarmPopup(key,dd,pii,false);
+              }else{
+                timer.done=true;saveState();updateTimerUI(dd,pii);updateCompleteBtn(dd,pii);
+                showAlarmPopup(key,dd,pii,true);
+              }
+            }
+          },500);
+        })(k,d,pi,ts);
+        updateTimerUI(d,pi);
+      }
+    });
+  }
+});
+
+// ═══════════════════════════════════════════
+// RESTAURER LES TIMERS ACTIFS AU CHARGEMENT
+// ═══════════════════════════════════════════
+Object.keys(S.timers).forEach(function(k){
+  var ts=S.timers[k];
+  if(ts&&ts.running&&!ts.done&&ts.startedAt){
+    var parts=k.split('-');
+    var d=parseInt(parts[0]);var pi=parseInt(parts[1]);
+    var elapsed=Math.floor((Date.now()-ts.startedAt)/1000);
+    ts.rem=Math.max(0,ts.initialRem-elapsed);
+    if(ts.rem<=0){
+      if(!ts.h1done){
+        ts.running=false;ts.h1done=true;ts.half=2;ts.rem=HALF_SEC;ts.initialRem=HALF_SEC;ts.startedAt=null;
+      }else{
+        ts.running=false;ts.done=true;ts.startedAt=null;
+      }
+      saveState();
+    }else{
+      ts.startedAt=Date.now();ts.initialRem=ts.rem;
+      (function(key,dd,pii,timer){
+        S.tivs[key]=setInterval(function(){
+          var el=Math.floor((Date.now()-timer.startedAt)/1000);
+          timer.rem=Math.max(0,timer.initialRem-el);
+          updateTimerUI(dd,pii);saveState();
+          if(timer.rem<=0){
+            clearInterval(S.tivs[key]);delete S.tivs[key];
+            timer.running=false;timer.startedAt=null;
+            if(!timer.h1done){
+              timer.h1done=true;timer.half=2;timer.rem=HALF_SEC;timer.initialRem=HALF_SEC;
+              saveState();updateTimerUI(dd,pii);showAlarmPopup(key,dd,pii,false);
+            }else{
+              timer.done=true;saveState();updateTimerUI(dd,pii);updateCompleteBtn(dd,pii);
+              showAlarmPopup(key,dd,pii,true);
+            }
+          }
+        },500);
+      })(k,d,pi,ts);
+    }
+  }
+});
+
+renderAll();
+</script>
+</body>
+</html>

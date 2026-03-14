@@ -1,0 +1,27 @@
+{
+  "name": "Apprendre le français — 10 jours",
+  "short_name": "Français 10",
+  "description": "Apprenez le français en 10 jours — 3h par jour — 30h au total",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0f4ff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "language"],
+  "screenshots": []
+}
