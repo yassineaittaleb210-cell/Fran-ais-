@@ -1,0 +1,11 @@
+{
+  "appId": "com.apprendre.francais",
+  "appName": "Français 10 Jours",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
